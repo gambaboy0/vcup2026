@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V CUP 2026 | ヴァリエンテ富山ジュニア</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1B8FD4;
+      --primary-dark: #1470a8;
+      --white: #FFFFFF;
+      --gold: #F5B400;
+      --gold-dark: #d49b00;
+      --bg: #f4f8fc;
+      --text: #1a1a1a;
+      --gray: #757575;
+      --gray-light: #e8edf2;
+      --red: #E53935;
+      --max-width: 1100px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      padding-top: 44px;
+    }
+
+    /* --- Notice Banner --- */
+    .notice-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--red);
+      color: var(--white);
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 10px 16px;
+      z-index: 1000;
+      line-height: 1.4;
+    }
+
+    /* --- Header --- */
+    .site-header {
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(160deg, #1B8FD4 0%, #0e5f99 60%, #0a4070 100%);
+    }
+
+    .header-svg-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.18;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .header-logo {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      line-height: 1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    }
+
+    .header-subtitle {
+      color: rgba(255,255,255,0.92);
+      font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+      margin-top: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .header-meta span {
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    /* --- Main Container --- */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* --- Category Buttons --- */
+    .category-section {
+      padding: 40px 16px 20px;
+    }
+
+    .category-section .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .category-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(27,143,212,0.12);
+      border: 2px solid transparent;
+      transition: all 0.25s ease;
+      color: var(--text);
+    }
+
+    .category-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 8px 32px rgba(27,143,212,0.22);
+      transform: translateY(-3px);
+    }
+
+    .category-card .card-icon {
+      flex-shrink: 0;
+      width: 60px;
+      height: 60px;
+    }
+
+    .category-card .card-body {
+      flex: 1;
+    }
+
+    .category-card .card-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .category-card .card-title {
+      font-size: clamp(1.3rem, 4vw, 1.7rem);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .category-card .card-sub {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    .category-card .card-arrow {
+      font-size: 1.6rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* --- Section Common --- */
+    section {
+      padding: 40px 16px;
+    }
+
+    .section-title {
+      font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+      font-weight: 700;
+      color: var(--primary);
+      border-left: 5px solid var(--gold);
+      padding-left: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* --- Overview Grid --- */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .overview-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .overview-card .ov-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .overview-card .ov-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .overview-card .ov-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* --- Access Section --- */
+    .map-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+      margin-bottom: 16px;
+    }
+
+    .map-wrapper iframe {
+      display: block;
+      width: 100%;
+      height: 350px;
+      border: 0;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-dark);
+    }
+
+    /* --- Parking Section --- */
+    .placeholder-box {
+      border: 2px dashed #b0bec5;
+      border-radius: 10px;
+      padding: 32px 20px;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.95rem;
+      background: #f9fafb;
+      line-height: 1.7;
+    }
+
+    /* --- Footer --- */
+    .site-footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      font-size: 0.82rem;
+      padding: 20px 16px;
+      margin-top: 40px;
+    }
+
+    /* --- Tablet & Desktop --- */
+    @media (min-width: 768px) {
+      .category-section .container {
+        flex-direction: row;
+      }
+      .category-card {
+        flex: 1;
+        flex-direction: column;
+        text-align: center;
+        padding: 36px 28px;
+      }
+      .category-card .card-icon {
+        width: 80px;
+        height: 80px;
+      }
+      .category-card .card-arrow {
+        display: none;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .site-header { min-height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Notice Banner -->
+  <div class="notice-banner" role="alert">
+    ⚠️ 現在準備中です。情報は順次更新します。
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <svg class="header-svg-bg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Field outline -->
+      <rect x="60" y="30" width="1080" height="260" fill="none" stroke="white" stroke-width="3"/>
+      <!-- Center line -->
+      <line x1="600" y1="30" x2="600" y2="290" stroke="white" stroke-width="2"/>
+      <!-- Center circle -->
+      <circle cx="600" cy="160" r="55" fill="none" stroke="white" stroke-width="2"/>
+      <circle cx="600" cy="160" r="4" fill="white"/>
+      <!-- Left penalty area -->
+      <rect x="60" y="95" width="130" height="130" fill="none" stroke="white" stroke-width="2"/>
+      <!-- Right penalty area -->
+      <rect x="1010" y="95" width="130" height="130" fill="none" stroke="white" stroke-width="2"/>
+      <!-- Left goal area -->
+      <rect x="60" y="125" width="50" height="70" fill="none" stroke="white" stroke-width="2"/>
+      <!-- Right goal area -->
+      <rect x="1090" y="125" width="50" height="70" fill="none" stroke="white" stroke-width="2"/>
+      <!-- Corner arcs -->
+      <path d="M60,30 Q75,30 75,45" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M1140,30 Q1125,30 1125,45" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M60,290 Q75,290 75,275" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M1140,290 Q1125,290 1125,275" fill="none" stroke="white" stroke-width="2"/>
+    </svg>
+
+    <div class="header-content">
+      <div class="header-logo">V CUP 2026</div>
+      <div class="header-subtitle">ヴァリエンテ富山ジュニア 主催</div>
+      <div class="header-meta">
+        <span>📅 2026年7月18日（土）</span>
+        <span>📍 薬勝寺池南公園サッカー場</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Category Buttons -->
+  <section class="category-section">
+    <div class="container">
+      <a href="vcup2026_u8.html" class="category-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="30" r="28" fill="#1B8FD4" stroke="#0e5f99" stroke-width="1.5"/>
+            <circle cx="30" cy="30" r="28" fill="none" stroke="white" stroke-width="1"/>
+            <polygon points="30,10 24,22 12,22 21,30 17,43 30,35 43,43 39,30 48,22 36,22" fill="white" opacity="0.15"/>
+            <path d="M30 8 L24.5 17H14L22 23.5L18.5 34L30 27.5L41.5 34L38 23.5L46 17H35.5Z" fill="none" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="30" cy="30" r="5" fill="white" opacity="0.25"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-label">Category</div>
+          <div class="card-title">U8 午前の部</div>
+          <div class="card-sub">チーム・組み合わせ・スケジュール</div>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+
+      <a href="vcup2026_u9.html" class="category-card">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="30" r="28" fill="#F5B400" stroke="#d49b00" stroke-width="1.5"/>
+            <circle cx="30" cy="30" r="28" fill="none" stroke="white" stroke-width="1"/>
+            <path d="M30 8 L24.5 17H14L22 23.5L18.5 34L30 27.5L41.5 34L38 23.5L46 17H35.5Z" fill="none" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="30" cy="30" r="5" fill="white" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-label">Category</div>
+          <div class="card-title">U9 午後の部</div>
+          <div class="card-sub">チーム・組み合わせ・スケジュール</div>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">大会概要</h2>
+      <div class="overview-grid">
+        <div class="overview-card">
+          <div class="ov-icon" aria-hidden="true">📅</div>
+          <div>
+            <div class="ov-label">開催日</div>
+            <div class="ov-value">2026年7月18日（土）</div>
+          </div>
+        </div>
+        <div class="overview-card">
+          <div class="ov-icon" aria-hidden="true">📍</div>
+          <div>
+            <div class="ov-label">会場</div>
+            <div class="ov-value">薬勝寺池南公園サッカー場</div>
+          </div>
+        </div>
+        <div class="overview-card">
+          <div class="ov-icon" aria-hidden="true">⚽</div>
+          <div>
+            <div class="ov-label">形式</div>
+            <div class="ov-value">グループリーグ＋トーナメント</div>
+          </div>
+        </div>
+        <div class="overview-card">
+          <div class="ov-icon" aria-hidden="true">🏆</div>
+          <div>
+            <div class="ov-label">主催</div>
+            <div class="ov-value">ヴァリエンテ富山ジュニア</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Access -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">アクセス</h2>
+      <div class="map-wrapper">
+        <iframe
+          src="https://maps.google.com/maps?q=薬勝寺池南公園サッカー場&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="薬勝寺池南公園サッカー場 地図"
+        ></iframe>
+      </div>
+      <a href="https://maps.app.goo.gl/dgMBXyNR3o1UKxbf6" target="_blank" rel="noopener noreferrer" class="btn-gold">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Google マップで開く
+      </a>
+    </div>
+  </section>
+
+  <!-- Parking -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">駐車場案内</h2>
+      <div class="placeholder-box">
+        駐車場情報は準備中です。<br>
+        決まり次第こちらに掲載します。
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2026 ヴァリエンテ富山ジュニア</p>
+  </footer>
+
+</body>
+</html>

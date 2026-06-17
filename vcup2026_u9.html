@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V CUP 2026 U9 | ヴァリエンテ富山ジュニア</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1B8FD4;
+      --primary-dark: #1470a8;
+      --white: #FFFFFF;
+      --gold: #F5B400;
+      --gold-dark: #d49b00;
+      --bg: #f4f8fc;
+      --text: #1a1a1a;
+      --gray: #757575;
+      --gray-light: #e8edf2;
+      --red: #E53935;
+      --max-width: 1100px;
+      --notice-h: 44px;
+      --nav-h: 52px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      padding-top: calc(var(--notice-h) + var(--nav-h));
+    }
+
+    /* --- Notice Banner --- */
+    .notice-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--red);
+      color: var(--white);
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 10px 16px;
+      z-index: 1000;
+      line-height: 1.4;
+    }
+
+    /* --- Nav --- */
+    .site-nav {
+      position: fixed;
+      top: var(--notice-h);
+      left: 0;
+      width: 100%;
+      background: var(--primary);
+      z-index: 900;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      height: var(--nav-h);
+      padding: 0 16px;
+      gap: 8px;
+    }
+
+    .nav-back {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.35);
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .nav-back:hover { background: rgba(255,255,255,0.15); }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: 4px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover { background: rgba(255,255,255,0.18); }
+
+    .hamburger {
+      margin-left: auto;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--primary-dark);
+      padding: 8px 16px 12px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 12px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    @media (min-width: 768px) {
+      .hamburger { display: none; }
+      .nav-links { display: flex; }
+      .mobile-menu { display: none !important; }
+    }
+
+    /* --- Header --- */
+    .site-header {
+      position: relative;
+      overflow: hidden;
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 36px 20px;
+      background: linear-gradient(160deg, #1B8FD4 0%, #0e5f99 60%, #0a4070 100%);
+    }
+
+    .header-svg-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.18;
+    }
+
+    .header-content { position: relative; z-index: 2; }
+
+    .header-logo {
+      font-size: clamp(2.2rem, 7vw, 4.5rem);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      line-height: 1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .badge {
+      background: var(--gold);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 5px 16px;
+      border-radius: 20px;
+    }
+
+    /* --- Container --- */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* --- Section Common --- */
+    section { padding: 40px 16px; }
+
+    .section-title {
+      font-size: clamp(1.15rem, 3.5vw, 1.55rem);
+      font-weight: 700;
+      color: var(--primary);
+      border-left: 5px solid var(--gold);
+      padding-left: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* --- Teams Grid --- */
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 600px) { .teams-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 900px) { .teams-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .team-item {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .team-item .num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--white);
+      background: var(--primary);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* --- Ranking Rules --- */
+    .ranking-rules {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      margin-bottom: 24px;
+    }
+
+    .ranking-rules h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .ranking-rules ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .ranking-rules ul li {
+      font-size: 0.88rem;
+      color: var(--text);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .ranking-rules ul li::before {
+      content: "・";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* --- Standings Table --- */
+    .standings-wrap {
+      overflow-x: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      background: var(--white);
+      min-width: 600px;
+    }
+
+    table thead th {
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 700;
+      padding: 10px 8px;
+      text-align: center;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+    }
+
+    table thead th:nth-child(2) { text-align: left; padding-left: 16px; }
+
+    table tbody td {
+      padding: 11px 8px;
+      text-align: center;
+      border-bottom: 1px solid var(--gray-light);
+      color: var(--text);
+    }
+
+    table tbody td:nth-child(2) { text-align: left; padding-left: 16px; font-weight: 700; }
+    table tbody tr:last-child td { border-bottom: none; }
+    table tbody tr:hover { background: #f0f7ff; }
+
+    /* --- Placeholder Box --- */
+    .placeholder-box {
+      border: 2px dashed #b0bec5;
+      border-radius: 10px;
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.95rem;
+      background: #f9fafb;
+      line-height: 1.8;
+    }
+
+    .placeholder-box .ph-icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    /* --- Schedule Table --- */
+    .table-wrap { overflow-x: auto; border-radius: 8px; }
+    .schedule-table { min-width: 900px; }
+    .schedule-table thead th {
+      background: var(--gray-light);
+      color: var(--gray);
+      font-weight: 700;
+      padding: 10px 8px;
+      text-align: center;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+    }
+    .schedule-table td.time {
+      white-space: nowrap;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary);
+      text-align: center;
+      vertical-align: middle;
+      background: #f0f7ff;
+      min-width: 58px;
+    }
+    .schedule-table td.match-cell { padding: 10px 8px; vertical-align: top; }
+    .schedule-table tbody td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--gray-light); }
+    .schedule-table tbody tr:last-child td { border-bottom: none; }
+    .schedule-table tbody tr:hover { background: #f0f7ff; }
+    .match-label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      background: rgba(27,143,212,0.1);
+      border-radius: 3px;
+      padding: 1px 5px;
+      white-space: nowrap;
+    }
+    .vs-text { display: block; font-size: 0.68rem; color: var(--gray); text-align: center; margin: 2px 0; }
+    .team-text { display: block; font-size: 0.82rem; font-weight: 700; text-align: center; line-height: 1.3; }
+    .empty-cell { text-align: center; color: var(--gray); font-size: 1.1rem; vertical-align: middle; }
+
+    /* --- Footer --- */
+    .site-footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      font-size: 0.82rem;
+      padding: 20px 16px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Notice Banner -->
+  <div class="notice-banner" role="alert">
+    ⚠️ 現在準備中です。情報は順次更新します。
+  </div>
+
+  <!-- Navigation -->
+  <nav class="site-nav" aria-label="ページ内ナビゲーション">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-back">← トップへ</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#teams">参加チーム</a></li>
+        <li><a href="#schedule">試合スケジュール</a></li>
+        <li><a href="#standings">順位表</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" role="menu">
+      <a href="#teams" role="menuitem">参加チーム</a>
+      <a href="#schedule" role="menuitem">試合スケジュール</a>
+      <a href="#standings" role="menuitem">順位表</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="site-header">
+    <svg class="header-svg-bg" viewBox="0 0 1200 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="60" y="20" width="1080" height="240" fill="none" stroke="white" stroke-width="3"/>
+      <line x1="600" y1="20" x2="600" y2="260" stroke="white" stroke-width="2"/>
+      <circle cx="600" cy="140" r="50" fill="none" stroke="white" stroke-width="2"/>
+      <circle cx="600" cy="140" r="4" fill="white"/>
+      <rect x="60" y="80" width="120" height="120" fill="none" stroke="white" stroke-width="2"/>
+      <rect x="1020" y="80" width="120" height="120" fill="none" stroke="white" stroke-width="2"/>
+      <rect x="60" y="110" width="46" height="60" fill="none" stroke="white" stroke-width="2"/>
+      <rect x="1094" y="110" width="46" height="60" fill="none" stroke="white" stroke-width="2"/>
+    </svg>
+
+    <div class="header-content">
+      <div class="header-logo">V CUP 2026 U9</div>
+      <div class="header-badges">
+        <span class="badge">14チーム参加</span>
+        <span class="badge">午後の部</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Teams Section -->
+  <section id="teams">
+    <div class="container">
+      <h2 class="section-title">参加チーム（14チーム）</h2>
+      <div class="teams-grid">
+        <div class="team-item"><span class="num">1</span>ヴァリエンテ富山</div>
+        <div class="team-item"><span class="num">2</span>富山中央FC</div>
+        <div class="team-item"><span class="num">3</span>ALVA</div>
+        <div class="team-item"><span class="num">4</span>カンピオーネ</div>
+        <div class="team-item"><span class="num">5</span>蜷川</div>
+        <div class="team-item"><span class="num">6</span>婦中西部</div>
+        <div class="team-item"><span class="num">7</span>CAVALO</div>
+        <div class="team-item"><span class="num">8</span>氷見FC</div>
+        <div class="team-item"><span class="num">9</span>プリマヴェーラ入善</div>
+        <div class="team-item"><span class="num">10</span>大久保</div>
+        <div class="team-item"><span class="num">11</span>FC滑川</div>
+        <div class="team-item"><span class="num">12</span>石動大谷</div>
+        <div class="team-item"><span class="num">13</span>ブルーソックス</div>
+        <div class="team-item"><span class="num">14</span>常願寺</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule Section -->
+  <section id="schedule">
+    <div class="container">
+      <h2 class="section-title">試合スケジュール</h2>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:16px;">14チーム × 各5試合 = 35試合　｜　コート4面　｜　1試合25分（試合20分＋準備5分）</p>
+      <div class="table-wrap">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>時刻</th>
+              <th>コート 1</th>
+              <th>コート 2</th>
+              <th>コート 3</th>
+              <th>コート 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time">12:30</td>
+              <td class="match-cell"><span class="match-label">第1試合</span><span class="team-text">ヴァリエンテ富山</span><span class="vs-text">vs</span><span class="team-text">富山中央FC</span></td>
+              <td class="match-cell"><span class="match-label">第2試合</span><span class="team-text">ALVA</span><span class="vs-text">vs</span><span class="team-text">カンピオーネ</span></td>
+              <td class="match-cell"><span class="match-label">第3試合</span><span class="team-text">蜷川</span><span class="vs-text">vs</span><span class="team-text">婦中西部</span></td>
+              <td class="match-cell"><span class="match-label">第4試合</span><span class="team-text">CAVALO</span><span class="vs-text">vs</span><span class="team-text">氷見FC</span></td>
+            </tr>
+            <tr>
+              <td class="time">12:55</td>
+              <td class="match-cell"><span class="match-label">第5試合</span><span class="team-text">プリマヴェーラ入善</span><span class="vs-text">vs</span><span class="team-text">大久保</span></td>
+              <td class="match-cell"><span class="match-label">第6試合</span><span class="team-text">FC滑川</span><span class="vs-text">vs</span><span class="team-text">石動大谷</span></td>
+              <td class="match-cell"><span class="match-label">第7試合</span><span class="team-text">ブルーソックス</span><span class="vs-text">vs</span><span class="team-text">常願寺</span></td>
+              <td class="match-cell"><span class="match-label">第8試合</span><span class="team-text">ヴァリエンテ富山</span><span class="vs-text">vs</span><span class="team-text">ALVA</span></td>
+            </tr>
+            <tr>
+              <td class="time">13:20</td>
+              <td class="match-cell"><span class="match-label">第9試合</span><span class="team-text">富山中央FC</span><span class="vs-text">vs</span><span class="team-text">蜷川</span></td>
+              <td class="match-cell"><span class="match-label">第10試合</span><span class="team-text">カンピオーネ</span><span class="vs-text">vs</span><span class="team-text">CAVALO</span></td>
+              <td class="match-cell"><span class="match-label">第11試合</span><span class="team-text">婦中西部</span><span class="vs-text">vs</span><span class="team-text">プリマヴェーラ入善</span></td>
+              <td class="match-cell"><span class="match-label">第12試合</span><span class="team-text">氷見FC</span><span class="vs-text">vs</span><span class="team-text">FC滑川</span></td>
+            </tr>
+            <tr>
+              <td class="time">13:45</td>
+              <td class="match-cell"><span class="match-label">第13試合</span><span class="team-text">大久保</span><span class="vs-text">vs</span><span class="team-text">ブルーソックス</span></td>
+              <td class="match-cell"><span class="match-label">第14試合</span><span class="team-text">石動大谷</span><span class="vs-text">vs</span><span class="team-text">常願寺</span></td>
+              <td class="match-cell"><span class="match-label">第15試合</span><span class="team-text">ヴァリエンテ富山</span><span class="vs-text">vs</span><span class="team-text">カンピオーネ</span></td>
+              <td class="match-cell"><span class="match-label">第16試合</span><span class="team-text">富山中央FC</span><span class="vs-text">vs</span><span class="team-text">婦中西部</span></td>
+            </tr>
+            <tr>
+              <td class="time">14:10</td>
+              <td class="match-cell"><span class="match-label">第17試合</span><span class="team-text">ALVA</span><span class="vs-text">vs</span><span class="team-text">氷見FC</span></td>
+              <td class="match-cell"><span class="match-label">第18試合</span><span class="team-text">蜷川</span><span class="vs-text">vs</span><span class="team-text">大久保</span></td>
+              <td class="match-cell"><span class="match-label">第19試合</span><span class="team-text">CAVALO</span><span class="vs-text">vs</span><span class="team-text">石動大谷</span></td>
+              <td class="match-cell"><span class="match-label">第20試合</span><span class="team-text">プリマヴェーラ入善</span><span class="vs-text">vs</span><span class="team-text">常願寺</span></td>
+            </tr>
+            <tr>
+              <td class="time">14:35</td>
+              <td class="match-cell"><span class="match-label">第21試合</span><span class="team-text">FC滑川</span><span class="vs-text">vs</span><span class="team-text">ブルーソックス</span></td>
+              <td class="match-cell"><span class="match-label">第22試合</span><span class="team-text">ヴァリエンテ富山</span><span class="vs-text">vs</span><span class="team-text">蜷川</span></td>
+              <td class="match-cell"><span class="match-label">第23試合</span><span class="team-text">富山中央FC</span><span class="vs-text">vs</span><span class="team-text">CAVALO</span></td>
+              <td class="match-cell"><span class="match-label">第24試合</span><span class="team-text">ALVA</span><span class="vs-text">vs</span><span class="team-text">プリマヴェーラ入善</span></td>
+            </tr>
+            <tr>
+              <td class="time">15:00</td>
+              <td class="match-cell"><span class="match-label">第25試合</span><span class="team-text">カンピオーネ</span><span class="vs-text">vs</span><span class="team-text">FC滑川</span></td>
+              <td class="match-cell"><span class="match-label">第26試合</span><span class="team-text">婦中西部</span><span class="vs-text">vs</span><span class="team-text">ブルーソックス</span></td>
+              <td class="match-cell"><span class="match-label">第27試合</span><span class="team-text">氷見FC</span><span class="vs-text">vs</span><span class="team-text">常願寺</span></td>
+              <td class="match-cell"><span class="match-label">第28試合</span><span class="team-text">大久保</span><span class="vs-text">vs</span><span class="team-text">石動大谷</span></td>
+            </tr>
+            <tr>
+              <td class="time">15:25</td>
+              <td class="match-cell"><span class="match-label">第29試合</span><span class="team-text">ヴァリエンテ富山</span><span class="vs-text">vs</span><span class="team-text">婦中西部</span></td>
+              <td class="match-cell"><span class="match-label">第30試合</span><span class="team-text">富山中央FC</span><span class="vs-text">vs</span><span class="team-text">常願寺</span></td>
+              <td class="match-cell"><span class="match-label">第31試合</span><span class="team-text">ALVA</span><span class="vs-text">vs</span><span class="team-text">石動大谷</span></td>
+              <td class="match-cell"><span class="match-label">第32試合</span><span class="team-text">カンピオーネ</span><span class="vs-text">vs</span><span class="team-text">氷見FC</span></td>
+            </tr>
+            <tr>
+              <td class="time">15:50</td>
+              <td class="match-cell"><span class="match-label">第33試合</span><span class="team-text">蜷川</span><span class="vs-text">vs</span><span class="team-text">ブルーソックス</span></td>
+              <td class="match-cell"><span class="match-label">第34試合</span><span class="team-text">CAVALO</span><span class="vs-text">vs</span><span class="team-text">大久保</span></td>
+              <td class="match-cell"><span class="match-label">第35試合</span><span class="team-text">プリマヴェーラ入善</span><span class="vs-text">vs</span><span class="team-text">FC滑川</span></td>
+              <td class="match-cell empty-cell">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Standings Section -->
+  <section id="standings">
+    <div class="container">
+      <h2 class="section-title">順位表</h2>
+      <div class="ranking-rules">
+        <h3>順位決定ルール</h3>
+        <ul>
+          <li>各チームランダムに5試合実施</li>
+          <li>勝点で順位決定（勝：3点 / 引分：1点 / 負：0点）</li>
+          <li>同点の場合：得失点差 → 総得点 → 抽選の順で決定</li>
+        </ul>
+      </div>
+      <div class="standings-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>順位</th>
+              <th>チーム名</th>
+              <th>試合</th>
+              <th>勝</th>
+              <th>分</th>
+              <th>負</th>
+              <th>得点</th>
+              <th>失点</th>
+              <th>得失差</th>
+              <th>勝点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>ヴァリエンテ富山</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>2</td><td>富山中央FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>3</td><td>ALVA</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>4</td><td>カンピオーネ</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>5</td><td>蜷川</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>6</td><td>婦中西部</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>7</td><td>CAVALO</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>8</td><td>氷見FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>9</td><td>プリマヴェーラ入善</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>10</td><td>大久保</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>11</td><td>FC滑川</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>12</td><td>石動大谷</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>13</td><td>ブルーソックス</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>14</td><td>常願寺</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2026 ヴァリエンテ富山ジュニア</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var hamburger = document.getElementById('hamburger');
+      var mobileMenu = document.getElementById('mobile-menu');
+
+      hamburger.addEventListener('click', function () {
+        var isOpen = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileMenu.classList.remove('open');
+          hamburger.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            var navH = document.querySelector('.site-nav').offsetHeight;
+            var noticeH = document.querySelector('.notice-banner').offsetHeight;
+            var offset = navH + noticeH + 12;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
