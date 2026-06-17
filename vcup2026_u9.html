@@ -624,7 +624,63 @@
   <script>
     const SPREADSHEET_ID = "1m0cgkEGX_mwFqYwST0ZE-bHer_t4vM4aYwTkKVZ1NuY";
 
+    /* --- CSV パーサー（クォート対応） --- */
+    function parseCSV(text) {
+      return text.trim().split('\n').map(function(line) {
+        var cells = [], inQ = false, cur = '';
+        for (var i = 0; i < line.length; i++) {
+          var c = line[i];
+          if (c === '"') { inQ = !inQ; }
+          else if (c === ',' && !inQ) { cells.push(cur.replace(/^"|"$/g, '').trim()); cur = ''; }
+          else { cur += c; }
+        }
+        cells.push(cur.replace(/^"|"$/g, '').trim());
+        return cells;
+      });
+    }
+
+    /* --- 勝点→得失差→総得点 の順で降順ソート --- */
+    function sortRows(rows) {
+      return rows.slice().sort(function(a, b) {
+        var pts = (parseFloat(b[8]) || 0) - (parseFloat(a[8]) || 0);
+        if (pts !== 0) return pts;
+        var gd  = (parseFloat(b[7]) || 0) - (parseFloat(a[7]) || 0);
+        if (gd  !== 0) return gd;
+        return   (parseFloat(b[5]) || 0) - (parseFloat(a[5]) || 0);
+      });
+    }
+
+    /* --- U9 順位表を描画（1列目に順位番号を自動付与） --- */
+    function renderU9Standings(rows) {
+      var tbody = document.querySelector('#standings .standings-wrap tbody');
+      if (!tbody) return;
+      var sorted = sortRows(rows);
+      tbody.innerHTML = sorted.map(function(cols, i) {
+        return '<tr><td>' + (i + 1) + '</td>' +
+          cols.map(function(c) { return '<td>' + (c !== '' ? c : '0') + '</td>'; }).join('') +
+          '</tr>';
+      }).join('');
+    }
+
+    /* --- U9 シートを fetch --- */
+    function loadU9Standings() {
+      var url = 'https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID +
+                '/gviz/tq?tqx=out:csv&sheet=U9';
+      fetch(url)
+        .then(function(res) { if (!res.ok) throw new Error(res.status); return res.text(); })
+        .then(function(text) {
+          var rows = parseCSV(text);
+          if (rows.length >= 2) renderU9Standings(rows.slice(1)); // 1行目はヘッダーなのでスキップ
+        })
+        .catch(function() {}); // シート未公開時はスタティック表示を維持
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
+      /* スプレッドシート連携：初回ロード＋30秒ごとに自動更新 */
+      loadU9Standings();
+      setInterval(loadU9Standings, 30000);
+
+      /* ハンバーガーメニュー */
       var hamburger = document.getElementById('hamburger');
       var mobileMenu = document.getElementById('mobile-menu');
 
@@ -642,15 +698,16 @@
         });
       });
 
+      /* スムーススクロール */
       document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
           var target = document.querySelector(this.getAttribute('href'));
           if (target) {
             e.preventDefault();
-            var navH = document.querySelector('.site-nav').offsetHeight;
+            var navH    = document.querySelector('.site-nav').offsetHeight;
             var noticeH = document.querySelector('.notice-banner').offsetHeight;
-            var offset = navH + noticeH + 12;
-            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            var offset  = navH + noticeH + 12;
+            var top     = target.getBoundingClientRect().top + window.pageYOffset - offset;
             window.scrollTo({ top: top, behavior: 'smooth' });
           }
         });
