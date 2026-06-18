@@ -50,12 +50,14 @@
     .mobile-menu a:hover { color: var(--gold); }
     @media (min-width: 768px) { .hamburger { display: none; } .nav-links { display: flex; } .mobile-menu { display: none !important; } }
 
-    .site-header { position: relative; overflow: hidden; min-height: 240px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 36px 20px; background: linear-gradient(160deg, #1B8FD4 0%, #0e5f99 60%, #0a4070 100%); }
-    .header-svg-bg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.18; }
-    .header-content { position: relative; z-index: 2; }
-    .header-logo { font-size: clamp(2.2rem, 7vw, 4.5rem); font-weight: 700; color: var(--gold); letter-spacing: 0.05em; line-height: 1; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
-    .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
-    .badge { background: var(--gold); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 5px 16px; border-radius: 20px; }
+    .site-header { position: relative; overflow: hidden; height: 200px; display: flex; align-items: flex-end; justify-content: center; }
+    @media (min-width: 768px) { .site-header { height: 240px; } }
+    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .hero-overlay { position: absolute; inset: 0; background: rgba(10,40,80,0.5); }
+    .header-content { position: relative; z-index: 2; text-align: center; padding: 16px 20px 22px; width: 100%; }
+    .header-logo { font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 700; color: var(--gold); letter-spacing: 0.05em; line-height: 1; text-shadow: 0 2px 14px rgba(0,0,0,0.5); }
+    .header-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+    .badge { background: rgba(255,255,255,0.18); color: var(--white); font-weight: 700; font-size: 0.82rem; padding: 4px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.38); text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
 
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 16px; }
     section { padding: 40px 16px; }
@@ -126,6 +128,14 @@
     .tourn-score { font-size: 0.88rem; font-weight: 700; color: var(--green); margin-top: 2px; }
     .tourn-vs { color: var(--gray); font-weight: 400; font-size: 0.75rem; }
 
+    /* --- Final Standings --- */
+    .final-standings-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    @media (min-width: 600px) { .final-standings-list { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 900px) { .final-standings-list { grid-template-columns: repeat(8, 1fr); } }
+    .final-item { background: var(--white); border-radius: 10px; padding: 12px 10px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .final-item .rank-badge { width: 28px; height: 28px; line-height: 28px; font-size: 0.85rem; flex-shrink: 0; }
+    .final-item .team-name { font-size: 0.82rem; font-weight: 700; line-height: 1.3; }
+
     .site-footer { background: var(--primary-dark); color: rgba(255,255,255,0.8); text-align: center; font-size: 0.82rem; padding: 20px 16px; margin-top: 40px; }
     .update-time { font-size: 0.72rem; color: var(--gray); text-align: right; margin-top: 8px; }
   </style>
@@ -142,6 +152,7 @@
         <li><a href="#schedule">試合スケジュール</a></li>
         <li><a href="#standings">順位表</a></li>
         <li><a href="#tournament">トーナメント</a></li>
+        <li><a href="#final-standings">最終順位</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
         <span></span><span></span><span></span>
@@ -152,25 +163,18 @@
       <a href="#schedule" role="menuitem">試合スケジュール</a>
       <a href="#standings" role="menuitem">順位表</a>
       <a href="#tournament" role="menuitem">トーナメント</a>
+      <a href="#final-standings" role="menuitem">最終順位</a>
     </div>
   </nav>
 
   <header class="site-header">
-    <svg class="header-svg-bg" viewBox="0 0 1200 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="60" y="20" width="1080" height="240" fill="none" stroke="white" stroke-width="3"/>
-      <line x1="600" y1="20" x2="600" y2="260" stroke="white" stroke-width="2"/>
-      <circle cx="600" cy="140" r="50" fill="none" stroke="white" stroke-width="2"/>
-      <circle cx="600" cy="140" r="4" fill="white"/>
-      <rect x="60" y="80" width="120" height="120" fill="none" stroke="white" stroke-width="2"/>
-      <rect x="1020" y="80" width="120" height="120" fill="none" stroke="white" stroke-width="2"/>
-      <rect x="60" y="110" width="46" height="60" fill="none" stroke="white" stroke-width="2"/>
-      <rect x="1094" y="110" width="46" height="60" fill="none" stroke="white" stroke-width="2"/>
-    </svg>
+    <img src="vcup_hero.jpg" alt="V CUP 2026" class="hero-img">
+    <div class="hero-overlay" aria-hidden="true"></div>
     <div class="header-content">
       <div class="header-logo">V CUP 2026 U8</div>
       <div class="header-badges">
-        <span class="badge">16チーム参加</span>
-        <span class="badge">午前の部</span>
+        <span class="badge">📅 2026年7月18日（土）午前の部</span>
+        <span class="badge">📍 薬勝寺池南公園サッカー場</span>
       </div>
     </div>
   </header>
@@ -407,6 +411,20 @@
     </div>
   </section>
 
+  <!-- Final Standings -->
+  <section id="final-standings">
+    <div class="container">
+      <h2 class="section-title">最終順位</h2>
+      <div id="final-standings-content">
+        <div class="tourn-pending">
+          <p style="font-size:1.4rem;margin-bottom:12px;">⏳</p>
+          トーナメント終了後に表示
+        </div>
+      </div>
+      <p class="update-time" id="final-updated"></p>
+    </div>
+  </section>
+
   <footer class="site-footer">
     <p>© 2026 ヴァリエンテ富山ジュニア</p>
   </footer>
@@ -415,7 +433,7 @@
     var SPREADSHEET_ID = "1m0cgkEGX_mwFqYwST0ZE-bHer_t4vM4aYwTkKVZ1NuY";
 
     /* キャッシュ */
-    var cache = { result: null, tourn: null };
+    var cache = { result: null, tourn: null, final: null };
 
     /* CSV パーサー */
     function parseCSV(text) {
@@ -465,21 +483,25 @@
         }
       });
 
-      /* tourn セル: B(1)=home C(2)=homeScore E(4)=away F(5)=awayScore */
+      /* tourn セル: B(1)=home C(2)=homeScore D(3)=homePK E(4)=awayPK F(5)=awayScore G(6)=away */
       document.querySelectorAll('.match-cell[data-sheet="tourn"]').forEach(function(cell) {
         var idx = parseInt(cell.dataset.row, 10);
         var rows = cache.tourn;
         if (!rows || !rows[idx]) return;
-        var r = rows[idx];
+        var r    = rows[idx];
         var home = r[1] || '—';
-        var away = r[4] || '—';
+        var away = r[6] || '—';
         var hs   = r[2];
         var as_  = r[5];
+        var hpk  = r[3];
+        var apk  = r[4];
         cell.querySelector('.home-team').textContent = home;
         cell.querySelector('.away-team').textContent = away;
         var sd = cell.querySelector('.score-display');
         if (hs !== '' && as_ !== '') {
-          sd.textContent = hs + ' - ' + as_;
+          var txt = hs + ' - ' + as_;
+          if (hpk !== '' && apk !== '') txt += '（PK ' + hpk + '-' + apk + '）';
+          sd.textContent = txt;
           sd.classList.add('has-score');
         } else {
           sd.textContent = 'vs';
@@ -581,16 +603,20 @@
         html += '<div class="tourn-group">';
         html += '<div class="tourn-group-header ' + group.cls + '">' + group.label + '</div>';
         group.matches.forEach(function(m) {
-          var r = tournRows && tournRows[m.idx];
-          var home  = r ? (r[1] || '—') : '—';
-          var away  = r ? (r[4] || '—') : '—';
-          var hs    = r ? r[2] : '';
-          var as_   = r ? r[5] : '';
+          var r    = tournRows && tournRows[m.idx];
+          var home = r ? (r[1] || '—') : '—';
+          var away = r ? (r[6] || '—') : '—';
+          var hs   = r ? r[2] : '';
+          var as_  = r ? r[5] : '';
+          var hpk  = r ? r[3] : '';
+          var apk  = r ? r[4] : '';
           html += '<div class="tourn-match">';
           html += '<div class="tourn-match-label">' + m.label + '<span class="tourn-match-time">' + m.time + '</span></div>';
           html += '<div class="tourn-teams">' + home + ' <span class="tourn-vs">vs</span> ' + away + '</div>';
           if (hs !== '' && as_ !== '') {
-            html += '<div class="tourn-score">' + hs + ' - ' + as_ + '</div>';
+            var scoreStr = hs + ' - ' + as_;
+            if (hpk !== '' && apk !== '') scoreStr += '（PK ' + hpk + '-' + apk + '）';
+            html += '<div class="tourn-score">' + scoreStr + '</div>';
           }
           html += '</div>';
         });
@@ -605,13 +631,61 @@
       if (el) el.textContent = '最終更新: ' + ts;
     }
 
+    /* ========== 最終順位 ==========
+       U8_最終順位: A(0)=順位 B(1)=チーム名
+       全試合終了判定: U8_トーナメント idx12(1位決定戦) C(2)=ホームスコアが入力済み */
+    function isTournamentDone(tournRows) {
+      var r = tournRows && tournRows[12];
+      return r && r[2] !== '';
+    }
+
+    function renderFinalStandings(finalRows, tournRows) {
+      var container = document.getElementById('final-standings-content');
+      if (!container) return;
+
+      if (!isTournamentDone(tournRows || [])) {
+        container.innerHTML = '<div class="tourn-pending"><p style="font-size:1.4rem;margin-bottom:12px;">⏳</p>トーナメント終了後に表示</div>';
+        return;
+      }
+
+      if (!finalRows || !finalRows.length) {
+        container.innerHTML = '<div class="tourn-pending">データを読み込み中...</div>';
+        return;
+      }
+
+      /* A(0)=順位の昇順でソート */
+      var sorted = finalRows.slice().sort(function(a, b) {
+        return (parseInt(a[0], 10) || 99) - (parseInt(b[0], 10) || 99);
+      });
+
+      var html = '<div class="final-standings-list">';
+      sorted.forEach(function(r) {
+        var rank     = r[0] || '—';
+        var team     = r[1] || '—';
+        var rankNum  = parseInt(rank, 10);
+        var rankClass = rankNum === 1 ? 'rank-1' : rankNum === 2 ? 'rank-2' : rankNum === 3 ? 'rank-3' : 'rank-other';
+        html += '<div class="final-item">';
+        html += '<span class="rank-badge ' + rankClass + '">' + rank + '</span>';
+        html += '<span class="team-name">' + team + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+      container.innerHTML = html;
+
+      var now = new Date();
+      var ts = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+      var el = document.getElementById('final-updated');
+      if (el) el.textContent = '最終更新: ' + ts;
+    }
+
     /* ========== メインロード ========== */
     function loadAll() {
-      var loaded = { result: false, tourn: false, A: false, B: false, C: false, D: false };
+      var loaded = { result: false, tourn: false };
 
       function tryRenderTournament() {
         if (loaded.result && loaded.tourn) {
           renderTournament(cache.tourn, cache.result);
+          renderFinalStandings(cache.final, cache.tourn);
         }
       }
 
@@ -627,6 +701,11 @@
         loaded.tourn = true;
         updateScheduleCells();
         tryRenderTournament();
+      });
+
+      loadSheet('U8_最終順位', function(rows) {
+        cache.final = rows;
+        renderFinalStandings(cache.final, cache.tourn);
       });
 
       loadSheet('U8_A', function(rows) { renderStandings('tbody-A', rows); });

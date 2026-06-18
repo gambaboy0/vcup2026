@@ -28,14 +28,13 @@
       font-family: 'Noto Sans JP', sans-serif;
       color: var(--text);
       background: var(--bg);
-      padding-top: 44px;
+      padding-top: 44px; /* notice banner height */
     }
 
     /* --- Notice Banner --- */
     .notice-banner {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       background: var(--red);
       color: var(--white);
@@ -47,145 +46,177 @@
       line-height: 1.4;
     }
 
-    /* --- Header --- */
+    /* --- Hero Header --- */
     .site-header {
       position: relative;
       overflow: hidden;
-      min-height: 280px;
+      min-height: calc(100vh - 44px);
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
-      text-align: center;
-      padding: 40px 20px;
-      background: linear-gradient(160deg, #1B8FD4 0%, #0e5f99 60%, #0a4070 100%);
     }
 
-    .header-svg-bg {
+    @media (min-width: 768px) {
+      .site-header { min-height: 680px; }
+    }
+
+    .hero-img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      opacity: 0.18;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* グラデーションオーバーレイ：上部は薄く、下部（テキスト・ボタンエリア）は濃く */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.04) 0%,
+        rgba(10,40,80,0.12) 35%,
+        rgba(10,40,80,0.65) 68%,
+        rgba(10,40,80,0.88) 100%
+      );
     }
 
     .header-content {
       position: relative;
       z-index: 2;
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 20px 20px 40px;
+      text-align: center;
     }
 
     .header-logo {
-      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-size: clamp(1.9rem, 7vw, 4rem);
       font-weight: 700;
       color: var(--gold);
       letter-spacing: 0.05em;
       line-height: 1;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+      text-shadow: 0 2px 16px rgba(0,0,0,0.55);
+      margin-bottom: 6px;
     }
 
     .header-subtitle {
-      color: rgba(255,255,255,0.92);
-      font-size: clamp(0.85rem, 2.5vw, 1.1rem);
-      margin-top: 10px;
+      color: rgba(255,255,255,0.9);
+      font-size: clamp(0.82rem, 2.2vw, 1rem);
+      font-weight: 700;
+      margin-bottom: 12px;
       letter-spacing: 0.04em;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
     }
 
     .header-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       justify-content: center;
-      margin-top: 16px;
+      margin-bottom: 28px;
     }
 
     .header-meta span {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.18);
       color: var(--white);
       padding: 5px 14px;
       border-radius: 20px;
-      font-size: 0.88rem;
-      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.38);
+      backdrop-filter: blur(4px);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
 
-    /* --- Main Container --- */
+    /* --- U8 / U9 ボタン --- */
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 500px) {
+      .hero-buttons { flex-direction: row; }
+    }
+
+    .hero-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      background: rgba(255,255,255,0.16);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.45);
+      border-radius: 16px;
+      padding: 20px 16px 16px;
+      text-decoration: none;
+      color: var(--white);
+      transition: all 0.25s ease;
+      text-align: center;
+    }
+
+    .hero-btn:hover, .hero-btn:focus {
+      background: rgba(255,255,255,0.26);
+      border-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+    }
+
+    .hero-btn.u9 {
+      border-color: rgba(245,180,0,0.7);
+      background: rgba(245,180,0,0.18);
+    }
+
+    .hero-btn.u9:hover, .hero-btn.u9:focus {
+      background: rgba(245,180,0,0.32);
+      border-color: var(--gold);
+    }
+
+    .hero-btn-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+    }
+
+    .hero-btn-title {
+      font-size: clamp(1.25rem, 4.5vw, 1.6rem);
+      font-weight: 700;
+      color: var(--white);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+      line-height: 1.2;
+    }
+
+    .hero-btn.u9 .hero-btn-title { color: var(--gold); }
+
+    .hero-btn-sub {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.78);
+      margin-top: 1px;
+    }
+
+    .hero-btn-arrow {
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* --- Container --- */
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
       padding: 0 16px;
     }
 
-    /* --- Category Buttons --- */
-    .category-section {
-      padding: 40px 16px 20px;
-    }
-
-    .category-section .container {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .category-card {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      background: var(--white);
-      border-radius: 16px;
-      padding: 28px 24px;
-      text-decoration: none;
-      box-shadow: 0 4px 20px rgba(27,143,212,0.12);
-      border: 2px solid transparent;
-      transition: all 0.25s ease;
-      color: var(--text);
-    }
-
-    .category-card:hover {
-      border-color: var(--primary);
-      box-shadow: 0 8px 32px rgba(27,143,212,0.22);
-      transform: translateY(-3px);
-    }
-
-    .category-card .card-icon {
-      flex-shrink: 0;
-      width: 60px;
-      height: 60px;
-    }
-
-    .category-card .card-body {
-      flex: 1;
-    }
-
-    .category-card .card-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .category-card .card-title {
-      font-size: clamp(1.3rem, 4vw, 1.7rem);
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .category-card .card-sub {
-      font-size: 0.85rem;
-      color: var(--gray);
-      margin-top: 4px;
-    }
-
-    .category-card .card-arrow {
-      font-size: 1.6rem;
-      color: var(--gold);
-      font-weight: 700;
-    }
-
-    /* --- Section Common --- */
-    section {
-      padding: 40px 16px;
-    }
+    section { padding: 40px 16px; }
 
     .section-title {
       font-size: clamp(1.2rem, 3.5vw, 1.6rem);
@@ -213,41 +244,13 @@
       gap: 12px;
     }
 
-    .overview-card .ov-icon {
-      font-size: 1.6rem;
-      line-height: 1;
-      flex-shrink: 0;
-    }
+    .overview-card .ov-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
+    .overview-card .ov-label { font-size: 0.75rem; color: var(--gray); font-weight: 700; margin-bottom: 4px; letter-spacing: 0.04em; }
+    .overview-card .ov-value { font-size: 0.95rem; font-weight: 700; color: var(--text); line-height: 1.4; }
 
-    .overview-card .ov-label {
-      font-size: 0.75rem;
-      color: var(--gray);
-      font-weight: 700;
-      margin-bottom: 4px;
-      letter-spacing: 0.04em;
-    }
-
-    .overview-card .ov-value {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.4;
-    }
-
-    /* --- Access Section --- */
-    .map-wrapper {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.12);
-      margin-bottom: 16px;
-    }
-
-    .map-wrapper iframe {
-      display: block;
-      width: 100%;
-      height: 350px;
-      border: 0;
-    }
+    /* --- Access --- */
+    .map-wrapper { border-radius: 12px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.12); margin-bottom: 16px; }
+    .map-wrapper iframe { display: block; width: 100%; height: 350px; border: 0; }
 
     .btn-gold {
       display: inline-flex;
@@ -262,12 +265,9 @@
       text-decoration: none;
       transition: background 0.2s;
     }
+    .btn-gold:hover { background: var(--gold-dark); }
 
-    .btn-gold:hover {
-      background: var(--gold-dark);
-    }
-
-    /* --- Parking Section --- */
+    /* --- Parking --- */
     .placeholder-box {
       border: 2px dashed #b0bec5;
       border-radius: 10px;
@@ -288,30 +288,6 @@
       padding: 20px 16px;
       margin-top: 40px;
     }
-
-    /* --- Tablet & Desktop --- */
-    @media (min-width: 768px) {
-      .category-section .container {
-        flex-direction: row;
-      }
-      .category-card {
-        flex: 1;
-        flex-direction: column;
-        text-align: center;
-        padding: 36px 28px;
-      }
-      .category-card .card-icon {
-        width: 80px;
-        height: 80px;
-      }
-      .category-card .card-arrow {
-        display: none;
-      }
-    }
-
-    @media (min-width: 1200px) {
-      .site-header { min-height: 320px; }
-    }
   </style>
 </head>
 <body>
@@ -321,80 +297,34 @@
     ⚠️ 現在準備中です。情報は順次更新します。
   </div>
 
-  <!-- Header -->
+  <!-- Hero Header -->
   <header class="site-header">
-    <svg class="header-svg-bg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- Field outline -->
-      <rect x="60" y="30" width="1080" height="260" fill="none" stroke="white" stroke-width="3"/>
-      <!-- Center line -->
-      <line x1="600" y1="30" x2="600" y2="290" stroke="white" stroke-width="2"/>
-      <!-- Center circle -->
-      <circle cx="600" cy="160" r="55" fill="none" stroke="white" stroke-width="2"/>
-      <circle cx="600" cy="160" r="4" fill="white"/>
-      <!-- Left penalty area -->
-      <rect x="60" y="95" width="130" height="130" fill="none" stroke="white" stroke-width="2"/>
-      <!-- Right penalty area -->
-      <rect x="1010" y="95" width="130" height="130" fill="none" stroke="white" stroke-width="2"/>
-      <!-- Left goal area -->
-      <rect x="60" y="125" width="50" height="70" fill="none" stroke="white" stroke-width="2"/>
-      <!-- Right goal area -->
-      <rect x="1090" y="125" width="50" height="70" fill="none" stroke="white" stroke-width="2"/>
-      <!-- Corner arcs -->
-      <path d="M60,30 Q75,30 75,45" fill="none" stroke="white" stroke-width="2"/>
-      <path d="M1140,30 Q1125,30 1125,45" fill="none" stroke="white" stroke-width="2"/>
-      <path d="M60,290 Q75,290 75,275" fill="none" stroke="white" stroke-width="2"/>
-      <path d="M1140,290 Q1125,290 1125,275" fill="none" stroke="white" stroke-width="2"/>
-    </svg>
-
+    <img src="vcup_hero.jpg" alt="V CUP 2026 ヴァリエンテ富山ジュニア" class="hero-img">
+    <div class="hero-overlay" aria-hidden="true"></div>
     <div class="header-content">
-      <div class="header-logo">V CUP 2026</div>
-      <div class="header-subtitle">ヴァリエンテ富山ジュニア 主催</div>
+      <h1 class="header-logo">V CUP 2026</h1>
+      <p class="header-subtitle">ヴァリエンテ富山ジュニア 主催</p>
       <div class="header-meta">
         <span>📅 2026年7月18日（土）</span>
         <span>📍 薬勝寺池南公園サッカー場</span>
       </div>
+      <!-- U8 / U9 選択ボタン -->
+      <div class="hero-buttons">
+        <a href="vcup2026_u8.html" class="hero-btn">
+          <span class="hero-btn-label">Category</span>
+          <span class="hero-btn-title">U8 午前の部</span>
+          <span class="hero-btn-sub">16チーム参加</span>
+          <span class="hero-btn-arrow">→</span>
+        </a>
+        <a href="vcup2026_u9.html" class="hero-btn u9">
+          <span class="hero-btn-label">Category</span>
+          <span class="hero-btn-title">U9 午後の部</span>
+          <span class="hero-btn-sub">14チーム参加</span>
+          <span class="hero-btn-arrow">→</span>
+        </a>
+      </div>
     </div>
   </header>
-
-  <!-- Category Buttons -->
-  <section class="category-section">
-    <div class="container">
-      <a href="vcup2026_u8.html" class="category-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="30" cy="30" r="28" fill="#1B8FD4" stroke="#0e5f99" stroke-width="1.5"/>
-            <circle cx="30" cy="30" r="28" fill="none" stroke="white" stroke-width="1"/>
-            <polygon points="30,10 24,22 12,22 21,30 17,43 30,35 43,43 39,30 48,22 36,22" fill="white" opacity="0.15"/>
-            <path d="M30 8 L24.5 17H14L22 23.5L18.5 34L30 27.5L41.5 34L38 23.5L46 17H35.5Z" fill="none" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
-            <circle cx="30" cy="30" r="5" fill="white" opacity="0.25"/>
-          </svg>
-        </div>
-        <div class="card-body">
-          <div class="card-label">Category</div>
-          <div class="card-title">U8 午前の部</div>
-          <div class="card-sub">チーム・組み合わせ・スケジュール</div>
-        </div>
-        <div class="card-arrow">›</div>
-      </a>
-
-      <a href="vcup2026_u9.html" class="category-card">
-        <div class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="30" cy="30" r="28" fill="#F5B400" stroke="#d49b00" stroke-width="1.5"/>
-            <circle cx="30" cy="30" r="28" fill="none" stroke="white" stroke-width="1"/>
-            <path d="M30 8 L24.5 17H14L22 23.5L18.5 34L30 27.5L41.5 34L38 23.5L46 17H35.5Z" fill="none" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
-            <circle cx="30" cy="30" r="5" fill="white" opacity="0.3"/>
-          </svg>
-        </div>
-        <div class="card-body">
-          <div class="card-label">Category</div>
-          <div class="card-title">U9 午後の部</div>
-          <div class="card-sub">チーム・組み合わせ・スケジュール</div>
-        </div>
-        <div class="card-arrow">›</div>
-      </a>
-    </div>
-  </section>
 
   <!-- Overview -->
   <section>
