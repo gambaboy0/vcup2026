@@ -21,441 +21,119 @@
       --gray: #757575;
       --gray-light: #e8edf2;
       --red: #E53935;
+      --green: #388e3c;
       --max-width: 1100px;
       --notice-h: 44px;
       --nav-h: 52px;
     }
 
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      padding-top: calc(var(--notice-h) + var(--nav-h));
-    }
+    body { font-family: 'Noto Sans JP', sans-serif; color: var(--text); background: var(--bg); padding-top: calc(var(--notice-h) + var(--nav-h)); }
 
-    /* --- Notice Banner --- */
-    .notice-banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: var(--red);
-      color: var(--white);
-      text-align: center;
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 10px 16px;
-      z-index: 1000;
-      line-height: 1.4;
-    }
+    .notice-banner { position: fixed; top: 0; left: 0; width: 100%; background: var(--red); color: var(--white); text-align: center; font-size: 0.85rem; font-weight: 700; padding: 10px 16px; z-index: 1000; line-height: 1.4; }
 
-    /* --- Nav --- */
-    .site-nav {
-      position: fixed;
-      top: var(--notice-h);
-      left: 0;
-      width: 100%;
-      background: var(--primary);
-      z-index: 900;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    .nav-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      height: var(--nav-h);
-      padding: 0 16px;
-      gap: 8px;
-    }
-
-    .nav-back {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.35);
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
-
+    .site-nav { position: fixed; top: var(--notice-h); left: 0; width: 100%; background: var(--primary); z-index: 900; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .nav-inner { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; height: var(--nav-h); padding: 0 16px; gap: 8px; }
+    .nav-back { color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 4px; white-space: nowrap; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.35); transition: background 0.2s; flex-shrink: 0; }
     .nav-back:hover { background: rgba(255,255,255,0.15); }
-
-    .nav-links {
-      display: none;
-      list-style: none;
-      gap: 4px;
-      flex: 1;
-      justify-content: flex-end;
-    }
-
-    .nav-links a {
-      color: rgba(255,255,255,0.9);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: background 0.2s;
-      white-space: nowrap;
-    }
-
+    .nav-links { display: none; list-style: none; gap: 4px; flex: 1; justify-content: flex-end; }
+    .nav-links a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.85rem; font-weight: 700; padding: 6px 12px; border-radius: 6px; transition: background 0.2s; white-space: nowrap; }
     .nav-links a:hover { background: rgba(255,255,255,0.18); }
-
-    .hamburger {
-      margin-left: auto;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      aria-label: "メニュー";
-    }
-
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
+    .hamburger { margin-left: auto; background: none; border: none; cursor: pointer; padding: 8px; display: flex; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      background: var(--primary-dark);
-      padding: 8px 16px 12px;
-    }
-
+    .mobile-menu { display: none; flex-direction: column; background: var(--primary-dark); padding: 8px 16px 12px; }
     .mobile-menu.open { display: flex; }
-
-    .mobile-menu a {
-      color: rgba(255,255,255,0.9);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 12px 8px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-    }
-
+    .mobile-menu a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.95rem; font-weight: 700; padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.12); }
     .mobile-menu a:last-child { border-bottom: none; }
     .mobile-menu a:hover { color: var(--gold); }
+    @media (min-width: 768px) { .hamburger { display: none; } .nav-links { display: flex; } .mobile-menu { display: none !important; } }
 
-    @media (min-width: 768px) {
-      .hamburger { display: none; }
-      .nav-links { display: flex; }
-      .mobile-menu { display: none !important; }
-    }
+    .site-header { position: relative; overflow: hidden; min-height: 240px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 36px 20px; background: linear-gradient(160deg, #1B8FD4 0%, #0e5f99 60%, #0a4070 100%); }
+    .header-svg-bg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.18; }
+    .header-content { position: relative; z-index: 2; }
+    .header-logo { font-size: clamp(2.2rem, 7vw, 4.5rem); font-weight: 700; color: var(--gold); letter-spacing: 0.05em; line-height: 1; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
+    .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+    .badge { background: var(--gold); color: var(--text); font-weight: 700; font-size: 0.85rem; padding: 5px 16px; border-radius: 20px; }
 
-    /* --- Header --- */
-    .site-header {
-      position: relative;
-      overflow: hidden;
-      min-height: 240px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 36px 20px;
-      background: linear-gradient(160deg, #1B8FD4 0%, #0e5f99 60%, #0a4070 100%);
-    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 16px; }
+    section { padding: 40px 16px; }
+    .section-title { font-size: clamp(1.15rem, 3.5vw, 1.55rem); font-weight: 700; color: var(--primary); border-left: 5px solid var(--gold); padding-left: 14px; margin-bottom: 24px; }
 
-    .header-svg-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      opacity: 0.18;
-    }
-
-    .header-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .header-logo {
-      font-size: clamp(2.2rem, 7vw, 4.5rem);
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.05em;
-      line-height: 1;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
-    }
-
-    .header-badges {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .badge {
-      background: var(--gold);
-      color: var(--text);
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 5px 16px;
-      border-radius: 20px;
-    }
-
-    /* --- Container --- */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
-    /* --- Section Common --- */
-    section {
-      padding: 40px 16px;
-    }
-
-    .section-title {
-      font-size: clamp(1.15rem, 3.5vw, 1.55rem);
-      font-weight: 700;
-      color: var(--primary);
-      border-left: 5px solid var(--gold);
-      padding-left: 14px;
-      margin-bottom: 24px;
-    }
-
-    /* --- Groups Grid --- */
-    .groups-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
-
-    @media (min-width: 768px) {
-      .groups-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    .group-card {
-      background: var(--white);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.08);
-    }
-
-    .group-card-header {
-      background: var(--primary);
-      color: var(--white);
-      font-weight: 700;
-      font-size: 1.05rem;
-      padding: 12px 18px;
-      letter-spacing: 0.06em;
-    }
-
-    .group-card ul {
-      list-style: none;
-      padding: 12px 0;
-    }
-
-    .group-card ul li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 18px;
-      font-size: 0.95rem;
-      border-bottom: 1px solid var(--gray-light);
-    }
-
+    .groups-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    @media (min-width: 768px) { .groups-grid { grid-template-columns: 1fr 1fr; } }
+    .group-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 14px rgba(0,0,0,0.08); }
+    .group-card-header { background: var(--primary); color: var(--white); font-weight: 700; font-size: 1.05rem; padding: 12px 18px; letter-spacing: 0.06em; }
+    .group-card ul { list-style: none; padding: 12px 0; }
+    .group-card ul li { display: flex; align-items: center; gap: 10px; padding: 10px 18px; font-size: 0.95rem; border-bottom: 1px solid var(--gray-light); }
     .group-card ul li:last-child { border-bottom: none; }
+    .team-num { font-size: 0.75rem; font-weight: 700; color: var(--white); background: var(--primary); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-    .team-num {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--white);
-      background: var(--primary);
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    /* --- Placeholder Box --- */
-    .placeholder-box {
-      border: 2px dashed #b0bec5;
-      border-radius: 10px;
-      padding: 40px 20px;
-      text-align: center;
-      color: var(--gray);
-      font-size: 0.95rem;
-      background: #f9fafb;
-      line-height: 1.8;
-    }
-
-    .placeholder-box .ph-icon {
-      font-size: 2.5rem;
-      display: block;
-      margin-bottom: 12px;
-    }
-
-    /* --- Standings Table --- */
-    .standings-group {
-      margin-bottom: 28px;
-    }
-
-    .standings-group-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--white);
-      background: var(--primary);
-      padding: 8px 16px;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-      background: var(--white);
-      min-width: 560px;
-    }
-
-    table thead th {
-      background: var(--gray-light);
-      color: var(--gray);
-      font-weight: 700;
-      padding: 10px 8px;
-      text-align: center;
-      font-size: 0.78rem;
-      letter-spacing: 0.02em;
-    }
-
+    /* --- Schedule Table --- */
+    .table-wrap { overflow-x: auto; border-radius: 0 0 8px 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--white); }
+    table thead th { background: var(--gray-light); color: var(--gray); font-weight: 700; padding: 10px 8px; text-align: center; font-size: 0.78rem; letter-spacing: 0.02em; }
     table thead th:first-child { text-align: left; padding-left: 16px; }
-
-    table tbody td {
-      padding: 11px 8px;
-      text-align: center;
-      border-bottom: 1px solid var(--gray-light);
-      color: var(--text);
-    }
-
+    table tbody td { padding: 11px 8px; text-align: center; border-bottom: 1px solid var(--gray-light); color: var(--text); }
     table tbody td:first-child { text-align: left; padding-left: 16px; font-weight: 700; }
     table tbody tr:last-child td { border-bottom: none; }
     table tbody tr:hover { background: #f0f7ff; }
 
-    /* --- Schedule Table --- */
-    .schedule-table { min-width: 900px; }
-    .schedule-table td.time {
-      white-space: nowrap;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--primary);
-      text-align: center;
-      vertical-align: middle;
-      background: #f0f7ff;
-      min-width: 58px;
-    }
-    .schedule-table .phase-row td {
-      background: var(--primary);
-      color: var(--white);
-      font-weight: 700;
-      font-size: 0.82rem;
-      padding: 7px 16px;
-      letter-spacing: 0.05em;
-    }
+    .schedule-table { min-width: 820px; }
+    .schedule-table thead th { background: var(--gray-light); color: var(--gray); }
+    .schedule-table td.time { white-space: nowrap; font-weight: 700; font-size: 0.95rem; color: var(--primary); text-align: center; vertical-align: middle; background: #f0f7ff; min-width: 58px; padding: 0 8px; }
+    .schedule-table .phase-row td { background: var(--primary); color: var(--white); font-weight: 700; font-size: 0.82rem; padding: 7px 16px; letter-spacing: 0.05em; }
     .schedule-table .tournament-row td.time { background: #fff8e1; color: var(--gold-dark); }
     .schedule-table .tournament-row td.match-cell { background: #fffde7; }
-    .schedule-table td.match-cell { padding: 10px 8px; vertical-align: top; }
-    .match-label {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
-      background: rgba(27,143,212,0.1);
-      border-radius: 3px;
-      padding: 1px 5px;
-      white-space: nowrap;
-    }
+    .schedule-table td.match-cell { padding: 8px 6px; vertical-align: top; min-width: 170px; }
+    .match-label { display: block; font-size: 0.68rem; font-weight: 700; color: var(--primary); margin-bottom: 3px; background: rgba(27,143,212,0.1); border-radius: 3px; padding: 1px 5px; white-space: nowrap; }
     .schedule-table .tournament-row .match-label { color: var(--gold-dark); background: rgba(245,180,0,0.15); }
-    .vs-text { display: block; font-size: 0.68rem; color: var(--gray); text-align: center; margin: 2px 0; }
-    .team-text { display: block; font-size: 0.82rem; font-weight: 700; text-align: center; line-height: 1.3; }
-    .empty-cell { text-align: center; color: var(--gray); font-size: 1.1rem; vertical-align: middle; }
+    .team-text { display: block; font-size: 0.8rem; font-weight: 700; text-align: center; line-height: 1.3; min-height: 1.2em; }
+    .score-display { display: block; font-size: 0.82rem; font-weight: 700; text-align: center; margin: 3px 0; color: var(--gray); }
+    .score-display.has-score { color: var(--green); font-size: 0.95rem; }
+    .empty-cell { text-align: center; color: var(--gray); font-size: 1.1rem; vertical-align: middle !important; }
 
-    /* --- Tournament Info --- */
-    .tournament-info {
-      background: var(--white);
-      border-radius: 14px;
-      padding: 24px 20px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.08);
-    }
-    .tournament-subtitle {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-    .tournament-desc {
-      font-size: 0.9rem;
-      color: var(--gray);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-    .tournament-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    @media (min-width: 768px) {
-      .tournament-grid { grid-template-columns: repeat(4, 1fr); }
-    }
-    .tournament-card { border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
-    .tournament-card .tc-header { font-weight: 700; font-size: 0.88rem; padding: 10px 14px; color: var(--white); }
-    .tournament-card.rank1 .tc-header { background: #F5B400; color: var(--text); }
-    .tournament-card.rank2 .tc-header { background: #9e9e9e; }
-    .tournament-card.rank3 .tc-header { background: #a0694a; }
-    .tournament-card.rank4 .tc-header { background: var(--primary); }
-    .tc-body { padding: 12px 14px; background: var(--white); }
-    .tc-teams { font-size: 0.8rem; color: var(--gray); margin-bottom: 6px; }
-    .tc-result { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    /* --- Standings --- */
+    .standings-group { margin-bottom: 28px; }
+    .standings-group-title { font-size: 1rem; font-weight: 700; color: var(--white); background: var(--primary); padding: 8px 16px; border-radius: 8px 8px 0 0; }
+    .standings-table { min-width: 580px; }
+    .standings-table thead th:first-child { text-align: center; padding-left: 8px; }
+    .standings-table tbody td:first-child { text-align: center; padding-left: 8px; font-weight: 700; }
+    .standings-table tbody td:nth-child(2) { text-align: left; padding-left: 14px; font-weight: 700; }
+    .standings-table thead th:nth-child(2) { text-align: left; padding-left: 14px; }
+    .rank-badge { display: inline-block; width: 24px; height: 24px; border-radius: 50%; line-height: 24px; text-align: center; font-size: 0.8rem; font-weight: 700; }
+    .rank-1 { background: var(--gold); color: #333; }
+    .rank-2 { background: #9e9e9e; color: #fff; }
+    .rank-3 { background: #a0694a; color: #fff; }
+    .rank-other { background: var(--gray-light); color: var(--text); }
 
-    /* --- Footer --- */
-    .site-footer {
-      background: var(--primary-dark);
-      color: rgba(255,255,255,0.8);
-      text-align: center;
-      font-size: 0.82rem;
-      padding: 20px 16px;
-      margin-top: 40px;
-    }
+    /* --- Tournament Section --- */
+    .tourn-pending { border: 2px dashed #b0bec5; border-radius: 10px; padding: 40px 20px; text-align: center; color: var(--gray); font-size: 0.95rem; background: #f9fafb; }
+    .tourn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (min-width: 768px) { .tourn-grid { grid-template-columns: repeat(4, 1fr); } }
+    .tourn-group { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .tourn-group-header { padding: 10px 14px; font-weight: 700; font-size: 0.88rem; color: var(--white); }
+    .tg-rank1 { background: var(--gold); color: var(--text) !important; }
+    .tg-rank2 { background: #9e9e9e; }
+    .tg-rank3 { background: #a0694a; }
+    .tg-rank4 { background: var(--primary); }
+    .tourn-match { padding: 10px 14px; border-bottom: 1px solid var(--gray-light); }
+    .tourn-match:last-child { border-bottom: none; }
+    .tourn-match-label { font-size: 0.72rem; font-weight: 700; color: var(--gray); margin-bottom: 4px; }
+    .tourn-match-time { font-size: 0.7rem; color: var(--primary); font-weight: 700; float: right; }
+    .tourn-teams { font-size: 0.82rem; font-weight: 700; line-height: 1.7; }
+    .tourn-score { font-size: 0.88rem; font-weight: 700; color: var(--green); margin-top: 2px; }
+    .tourn-vs { color: var(--gray); font-weight: 400; font-size: 0.75rem; }
+
+    .site-footer { background: var(--primary-dark); color: rgba(255,255,255,0.8); text-align: center; font-size: 0.82rem; padding: 20px 16px; margin-top: 40px; }
+    .update-time { font-size: 0.72rem; color: var(--gray); text-align: right; margin-top: 8px; }
   </style>
 </head>
 <body>
 
-  <!-- Notice Banner -->
-  <div class="notice-banner" role="alert">
-    ⚠️ 現在準備中です。情報は順次更新します。
-  </div>
+  <div class="notice-banner" role="alert">⚠️ 現在準備中です。情報は順次更新します。</div>
 
-  <!-- Navigation -->
   <nav class="site-nav" aria-label="ページ内ナビゲーション">
     <div class="nav-inner">
       <a href="index.html" class="nav-back">← トップへ</a>
@@ -466,9 +144,7 @@
         <li><a href="#tournament">トーナメント</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
     <div class="mobile-menu" id="mobile-menu" role="menu">
@@ -479,7 +155,6 @@
     </div>
   </nav>
 
-  <!-- Header -->
   <header class="site-header">
     <svg class="header-svg-bg" viewBox="0 0 1200 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect x="60" y="20" width="1080" height="240" fill="none" stroke="white" stroke-width="3"/>
@@ -491,7 +166,6 @@
       <rect x="60" y="110" width="46" height="60" fill="none" stroke="white" stroke-width="2"/>
       <rect x="1094" y="110" width="46" height="60" fill="none" stroke="white" stroke-width="2"/>
     </svg>
-
     <div class="header-content">
       <div class="header-logo">V CUP 2026 U8</div>
       <div class="header-badges">
@@ -501,13 +175,11 @@
     </div>
   </header>
 
-  <!-- Teams Section -->
+  <!-- Teams -->
   <section id="teams">
     <div class="container">
       <h2 class="section-title">参加チーム・組み合わせ</h2>
       <div class="groups-grid">
-
-        <!-- Group A -->
         <div class="group-card">
           <div class="group-card-header">GROUP A</div>
           <ul>
@@ -517,8 +189,6 @@
             <li><span class="team-num">4</span>FC滑川</li>
           </ul>
         </div>
-
-        <!-- Group B -->
         <div class="group-card">
           <div class="group-card-header">GROUP B</div>
           <ul>
@@ -528,8 +198,6 @@
             <li><span class="team-num">4</span>EST小杉</li>
           </ul>
         </div>
-
-        <!-- Group C -->
         <div class="group-card">
           <div class="group-card-header">GROUP C</div>
           <ul>
@@ -539,8 +207,6 @@
             <li><span class="team-num">4</span>スフィーダ</li>
           </ul>
         </div>
-
-        <!-- Group D -->
         <div class="group-card">
           <div class="group-card-header">GROUP D</div>
           <ul>
@@ -550,12 +216,11 @@
             <li><span class="team-num">4</span>蜷川</li>
           </ul>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Schedule Section -->
+  <!-- Schedule -->
   <section id="schedule">
     <div class="container">
       <h2 class="section-title">試合スケジュール</h2>
@@ -572,195 +237,154 @@
           </thead>
           <tbody>
             <tr class="phase-row"><td colspan="5">▶ グループリーグ</td></tr>
+            <!-- 8:00 -->
             <tr>
               <td class="time">8:00</td>
-              <td class="match-cell"><span class="match-label">A 第1試合</span><span class="team-text">富山中央SC</span><span class="vs-text">vs</span><span class="team-text">BEZERRO</span></td>
-              <td class="match-cell"><span class="match-label">B 第1試合</span><span class="team-text">EST小杉</span><span class="vs-text">vs</span><span class="team-text">大久保少年サッカー</span></td>
-              <td class="match-cell"><span class="match-label">C 第1試合</span><span class="team-text">鵜坂</span><span class="vs-text">vs</span><span class="team-text">プリマヴェーラ入善</span></td>
-              <td class="match-cell"><span class="match-label">D 第1試合</span><span class="team-text">蜷川</span><span class="vs-text">vs</span><span class="team-text">CAMPIONE FUKUOKA</span></td>
+              <td class="match-cell" data-sheet="result" data-row="0"><span class="match-label">A 第1試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="1"><span class="match-label">A 第2試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="2"><span class="match-label">B 第1試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="3"><span class="match-label">B 第2試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
+            <!-- 8:25 -->
             <tr>
               <td class="time">8:25</td>
-              <td class="match-cell"><span class="match-label">A 第2試合</span><span class="team-text">FC滑川</span><span class="vs-text">vs</span><span class="team-text">みなみFC</span></td>
-              <td class="match-cell"><span class="match-label">B 第2試合</span><span class="team-text">石動大谷</span><span class="vs-text">vs</span><span class="team-text">ヴァリエンテ富山</span></td>
-              <td class="match-cell"><span class="match-label">C 第2試合</span><span class="team-text">ELITE JAPAN</span><span class="vs-text">vs</span><span class="team-text">スフィーダ</span></td>
-              <td class="match-cell"><span class="match-label">D 第2試合</span><span class="team-text">TOLL</span><span class="vs-text">vs</span><span class="team-text">ALVA</span></td>
+              <td class="match-cell" data-sheet="result" data-row="4"><span class="match-label">C 第1試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="5"><span class="match-label">C 第2試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="6"><span class="match-label">D 第1試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="7"><span class="match-label">D 第2試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
+            <!-- 8:50 -->
             <tr>
               <td class="time">8:50</td>
-              <td class="match-cell"><span class="match-label">A 第3試合</span><span class="team-text">富山中央SC</span><span class="vs-text">vs</span><span class="team-text">FC滑川</span></td>
-              <td class="match-cell"><span class="match-label">B 第3試合</span><span class="team-text">EST小杉</span><span class="vs-text">vs</span><span class="team-text">石動大谷</span></td>
-              <td class="match-cell"><span class="match-label">C 第3試合</span><span class="team-text">鵜坂</span><span class="vs-text">vs</span><span class="team-text">スフィーダ</span></td>
-              <td class="match-cell"><span class="match-label">D 第3試合</span><span class="team-text">CAMPIONE FUKUOKA</span><span class="vs-text">vs</span><span class="team-text">ALVA</span></td>
+              <td class="match-cell" data-sheet="result" data-row="8"><span class="match-label">A 第3試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="9"><span class="match-label">A 第4試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="10"><span class="match-label">B 第3試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="11"><span class="match-label">B 第4試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
+            <!-- 9:15 -->
             <tr>
               <td class="time">9:15</td>
-              <td class="match-cell"><span class="match-label">A 第4試合</span><span class="team-text">BEZERRO</span><span class="vs-text">vs</span><span class="team-text">みなみFC</span></td>
-              <td class="match-cell"><span class="match-label">B 第4試合</span><span class="team-text">大久保少年サッカー</span><span class="vs-text">vs</span><span class="team-text">ヴァリエンテ富山</span></td>
-              <td class="match-cell"><span class="match-label">C 第4試合</span><span class="team-text">ELITE JAPAN</span><span class="vs-text">vs</span><span class="team-text">プリマヴェーラ入善</span></td>
-              <td class="match-cell"><span class="match-label">D 第4試合</span><span class="team-text">蜷川</span><span class="vs-text">vs</span><span class="team-text">TOLL</span></td>
+              <td class="match-cell" data-sheet="result" data-row="12"><span class="match-label">C 第3試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="13"><span class="match-label">C 第4試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="14"><span class="match-label">D 第3試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="15"><span class="match-label">D 第4試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
+            <!-- 9:40 -->
             <tr>
               <td class="time">9:40</td>
-              <td class="match-cell"><span class="match-label">A 第5試合</span><span class="team-text">みなみFC</span><span class="vs-text">vs</span><span class="team-text">富山中央SC</span></td>
-              <td class="match-cell"><span class="match-label">B 第5試合</span><span class="team-text">ヴァリエンテ富山</span><span class="vs-text">vs</span><span class="team-text">EST小杉</span></td>
-              <td class="match-cell"><span class="match-label">C 第5試合</span><span class="team-text">プリマヴェーラ入善</span><span class="vs-text">vs</span><span class="team-text">ELITE JAPAN</span></td>
-              <td class="match-cell"><span class="match-label">D 第5試合</span><span class="team-text">ALVA</span><span class="vs-text">vs</span><span class="team-text">蜷川</span></td>
+              <td class="match-cell" data-sheet="result" data-row="16"><span class="match-label">A 第5試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="17"><span class="match-label">A 第6試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="18"><span class="match-label">B 第5試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="19"><span class="match-label">B 第6試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
+            <!-- 10:05 -->
             <tr>
               <td class="time">10:05</td>
-              <td class="match-cell"><span class="match-label">A 第6試合</span><span class="team-text">BEZERRO</span><span class="vs-text">vs</span><span class="team-text">FC滑川</span></td>
-              <td class="match-cell"><span class="match-label">B 第6試合</span><span class="team-text">大久保少年サッカー</span><span class="vs-text">vs</span><span class="team-text">石動大谷</span></td>
-              <td class="match-cell"><span class="match-label">C 第6試合</span><span class="team-text">スフィーダ</span><span class="vs-text">vs</span><span class="team-text">鵜坂</span></td>
-              <td class="match-cell"><span class="match-label">D 第6試合</span><span class="team-text">TOLL</span><span class="vs-text">vs</span><span class="team-text">CAMPIONE FUKUOKA</span></td>
+              <td class="match-cell" data-sheet="result" data-row="20"><span class="match-label">C 第5試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="21"><span class="match-label">C 第6試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="22"><span class="match-label">D 第5試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="result" data-row="23"><span class="match-label">D 第6試合</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
             <tr class="phase-row"><td colspan="5">▶ トーナメント（4コート全面使用）</td></tr>
+            <!-- 10:30 -->
             <tr class="tournament-row">
               <td class="time">10:30</td>
-              <td class="match-cell"><span class="match-label">3位T 準決勝2</span><span class="team-text">グループC 3位</span><span class="vs-text">vs</span><span class="team-text">グループD 3位</span></td>
-              <td class="match-cell"><span class="match-label">4位T 準決勝2</span><span class="team-text">グループC 4位</span><span class="vs-text">vs</span><span class="team-text">グループD 4位</span></td>
-              <td class="match-cell"><span class="match-label">3位T 準決勝1</span><span class="team-text">グループA 3位</span><span class="vs-text">vs</span><span class="team-text">グループB 3位</span></td>
-              <td class="match-cell"><span class="match-label">4位T 準決勝1</span><span class="team-text">グループA 4位</span><span class="vs-text">vs</span><span class="team-text">グループB 4位</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="0"><span class="match-label">3位T 準決勝1</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="1"><span class="match-label">3位T 準決勝2</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="2"><span class="match-label">4位T 準決勝1</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="3"><span class="match-label">4位T 準決勝2</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
+            <!-- 10:55 -->
             <tr class="tournament-row">
               <td class="time">10:55</td>
-              <td class="match-cell"><span class="match-label">1位T 準決勝2</span><span class="team-text">グループC 1位</span><span class="vs-text">vs</span><span class="team-text">グループD 1位</span></td>
-              <td class="match-cell"><span class="match-label">2位T 準決勝2</span><span class="team-text">グループC 2位</span><span class="vs-text">vs</span><span class="team-text">グループD 2位</span></td>
-              <td class="match-cell"><span class="match-label">1位T 準決勝1</span><span class="team-text">グループA 1位</span><span class="vs-text">vs</span><span class="team-text">グループB 1位</span></td>
-              <td class="match-cell"><span class="match-label">2位T 準決勝1</span><span class="team-text">グループA 2位</span><span class="vs-text">vs</span><span class="team-text">グループB 2位</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="4"><span class="match-label">1位T 準決勝1</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="5"><span class="match-label">1位T 準決勝2</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="6"><span class="match-label">2位T 準決勝1</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="7"><span class="match-label">2位T 準決勝2</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
+            <!-- 11:20 -->
             <tr class="tournament-row">
               <td class="time">11:20</td>
-              <td class="match-cell"><span class="match-label">3位T 11位決定戦</span><span class="team-text">3位T準決勝1 敗者</span><span class="vs-text">vs</span><span class="team-text">3位T準決勝2 敗者</span></td>
-              <td class="match-cell"><span class="match-label">4位T 15位決定戦</span><span class="team-text">4位T準決勝1 敗者</span><span class="vs-text">vs</span><span class="team-text">4位T準決勝2 敗者</span></td>
-              <td class="match-cell"><span class="match-label">3位T 9位決定戦</span><span class="team-text">3位T準決勝1 勝者</span><span class="vs-text">vs</span><span class="team-text">3位T準決勝2 勝者</span></td>
-              <td class="match-cell"><span class="match-label">4位T 13位決定戦</span><span class="team-text">4位T準決勝1 勝者</span><span class="vs-text">vs</span><span class="team-text">4位T準決勝2 勝者</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="8"><span class="match-label">9位決定戦</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="9"><span class="match-label">11位決定戦</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="10"><span class="match-label">13位決定戦</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="11"><span class="match-label">15位決定戦</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
+            <!-- 11:45 -->
             <tr class="tournament-row">
               <td class="time">11:45</td>
-              <td class="match-cell"><span class="match-label">1位T 3位決定戦</span><span class="team-text">1位T準決勝1 敗者</span><span class="vs-text">vs</span><span class="team-text">1位T準決勝2 敗者</span></td>
-              <td class="match-cell"><span class="match-label">2位T 7位決定戦</span><span class="team-text">2位T準決勝1 敗者</span><span class="vs-text">vs</span><span class="team-text">2位T準決勝2 敗者</span></td>
-              <td class="match-cell"><span class="match-label">1位T 1位決定戦</span><span class="team-text">1位T準決勝1 勝者</span><span class="vs-text">vs</span><span class="team-text">1位T準決勝2 勝者</span></td>
-              <td class="match-cell"><span class="match-label">2位T 5位決定戦</span><span class="team-text">2位T準決勝1 勝者</span><span class="vs-text">vs</span><span class="team-text">2位T準決勝2 勝者</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="12"><span class="match-label">1位決定戦</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="13"><span class="match-label">3位決定戦</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="14"><span class="match-label">5位決定戦</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
+              <td class="match-cell" data-sheet="tourn" data-row="15"><span class="match-label">7位決定戦</span><span class="team-text home-team">—</span><span class="score-display">vs</span><span class="team-text away-team">—</span></td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p class="update-time" id="schedule-updated"></p>
     </div>
   </section>
 
-  <!-- Standings Section -->
+  <!-- Standings -->
   <section id="standings">
     <div class="container">
       <h2 class="section-title">順位表</h2>
 
-      <!-- Group A -->
       <div class="standings-group">
         <div class="standings-group-title">GROUP A</div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>チーム名</th>
-                <th>試合</th>
-                <th>勝</th>
-                <th>分</th>
-                <th>負</th>
-                <th>得点</th>
-                <th>失点</th>
-                <th>得失差</th>
-                <th>勝点</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>富山中央SC</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>BEZERRO</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>みなみFC</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>FC滑川</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <div class="table-wrap" style="border-radius:0 0 8px 8px;">
+          <table class="standings-table">
+            <thead><tr><th>順位</th><th>チーム名</th><th>勝点</th><th>得失差</th><th>試合</th><th>勝</th><th>分</th><th>負</th><th>得点</th><th>失点</th></tr></thead>
+            <tbody id="tbody-A">
+              <tr><td>—</td><td>富山中央SC</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>BEZERRO</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>みなみFC</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>FC滑川</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Group B -->
       <div class="standings-group">
         <div class="standings-group-title">GROUP B</div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>チーム名</th>
-                <th>試合</th>
-                <th>勝</th>
-                <th>分</th>
-                <th>負</th>
-                <th>得点</th>
-                <th>失点</th>
-                <th>得失差</th>
-                <th>勝点</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>ヴァリエンテ富山</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>大久保少年サッカー</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>石動大谷</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>EST小杉</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <div class="table-wrap" style="border-radius:0 0 8px 8px;">
+          <table class="standings-table">
+            <thead><tr><th>順位</th><th>チーム名</th><th>勝点</th><th>得失差</th><th>試合</th><th>勝</th><th>分</th><th>負</th><th>得点</th><th>失点</th></tr></thead>
+            <tbody id="tbody-B">
+              <tr><td>—</td><td>ヴァリエンテ富山</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>大久保少年サッカー</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>石動大谷</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>EST小杉</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Group C -->
       <div class="standings-group">
         <div class="standings-group-title">GROUP C</div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>チーム名</th>
-                <th>試合</th>
-                <th>勝</th>
-                <th>分</th>
-                <th>負</th>
-                <th>得点</th>
-                <th>失点</th>
-                <th>得失差</th>
-                <th>勝点</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>鵜坂</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>ELITE JAPAN</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>プリマヴェーラ入善</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>スフィーダ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <div class="table-wrap" style="border-radius:0 0 8px 8px;">
+          <table class="standings-table">
+            <thead><tr><th>順位</th><th>チーム名</th><th>勝点</th><th>得失差</th><th>試合</th><th>勝</th><th>分</th><th>負</th><th>得点</th><th>失点</th></tr></thead>
+            <tbody id="tbody-C">
+              <tr><td>—</td><td>鵜坂</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>ELITE JAPAN</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>プリマヴェーラ入善</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>スフィーダ</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Group D -->
       <div class="standings-group">
         <div class="standings-group-title">GROUP D</div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>チーム名</th>
-                <th>試合</th>
-                <th>勝</th>
-                <th>分</th>
-                <th>負</th>
-                <th>得点</th>
-                <th>失点</th>
-                <th>得失差</th>
-                <th>勝点</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>TOLL</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>ALVA</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>CAMPIONE FUKUOKA</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-              <tr><td>蜷川</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <div class="table-wrap" style="border-radius:0 0 8px 8px;">
+          <table class="standings-table">
+            <thead><tr><th>順位</th><th>チーム名</th><th>勝点</th><th>得失差</th><th>試合</th><th>勝</th><th>分</th><th>負</th><th>得点</th><th>失点</th></tr></thead>
+            <tbody id="tbody-D">
+              <tr><td>—</td><td>TOLL</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>ALVA</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>CAMPIONE FUKUOKA</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>—</td><td>蜷川</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
             </tbody>
           </table>
         </div>
@@ -769,64 +393,31 @@
     </div>
   </section>
 
-  <!-- Tournament Section -->
+  <!-- Tournament -->
   <section id="tournament">
     <div class="container">
       <h2 class="section-title">トーナメント</h2>
-      <div class="tournament-info">
-        <h3 class="tournament-subtitle">同順位トーナメント方式</h3>
-        <p class="tournament-desc">グループリーグ終了後、各グループの同順位チーム同士でトーナメントを行い最終順位を決定します。</p>
-        <div class="tournament-grid">
-          <div class="tournament-card rank1">
-            <div class="tc-header">1位トーナメント</div>
-            <div class="tc-body">
-              <p class="tc-teams">各グループ1位 4チーム</p>
-              <p class="tc-teams">準決勝（10:55）</p>
-              <p class="tc-teams">3位決定戦・1位決定戦（11:45）</p>
-              <p class="tc-result">→ 1〜4位確定</p>
-            </div>
-          </div>
-          <div class="tournament-card rank2">
-            <div class="tc-header">2位トーナメント</div>
-            <div class="tc-body">
-              <p class="tc-teams">各グループ2位 4チーム</p>
-              <p class="tc-teams">準決勝（10:55）</p>
-              <p class="tc-teams">7位決定戦・5位決定戦（11:45）</p>
-              <p class="tc-result">→ 5〜8位確定</p>
-            </div>
-          </div>
-          <div class="tournament-card rank3">
-            <div class="tc-header">3位トーナメント</div>
-            <div class="tc-body">
-              <p class="tc-teams">各グループ3位 4チーム</p>
-              <p class="tc-teams">準決勝（10:30）</p>
-              <p class="tc-teams">11位決定戦・9位決定戦（11:20）</p>
-              <p class="tc-result">→ 9〜12位確定</p>
-            </div>
-          </div>
-          <div class="tournament-card rank4">
-            <div class="tc-header">4位トーナメント</div>
-            <div class="tc-body">
-              <p class="tc-teams">各グループ4位 4チーム</p>
-              <p class="tc-teams">準決勝（10:30）</p>
-              <p class="tc-teams">15位決定戦・13位決定戦（11:20）</p>
-              <p class="tc-result">→ 13〜16位確定</p>
-            </div>
-          </div>
+      <div id="tournament-content">
+        <div class="tourn-pending">
+          <p style="font-size:1.4rem;margin-bottom:12px;">⏳</p>
+          グループリーグ終了後に表示
         </div>
       </div>
+      <p class="update-time" id="tourn-updated"></p>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <p>© 2026 ヴァリエンテ富山ジュニア</p>
   </footer>
 
   <script>
-    const SPREADSHEET_ID = "1m0cgkEGX_mwFqYwST0ZE-bHer_t4vM4aYwTkKVZ1NuY";
+    var SPREADSHEET_ID = "1m0cgkEGX_mwFqYwST0ZE-bHer_t4vM4aYwTkKVZ1NuY";
 
-    /* --- CSV パーサー（クォート対応） --- */
+    /* キャッシュ */
+    var cache = { result: null, tourn: null };
+
+    /* CSV パーサー */
     function parseCSV(text) {
       return text.trim().split('\n').map(function(line) {
         var cells = [], inQ = false, cur = '';
@@ -841,78 +432,223 @@
       });
     }
 
-    /* --- 勝点→得失差→総得点 の順で降順ソート --- */
-    function sortRows(rows) {
-      return rows.slice().sort(function(a, b) {
-        var pts = (parseFloat(b[8]) || 0) - (parseFloat(a[8]) || 0);
-        if (pts !== 0) return pts;
-        var gd  = (parseFloat(b[7]) || 0) - (parseFloat(a[7]) || 0);
-        if (gd  !== 0) return gd;
-        return   (parseFloat(b[5]) || 0) - (parseFloat(a[5]) || 0);
-      });
-    }
-
-    /* --- グループ名から対応する tbody を取得 --- */
-    function getTbodyByGroup(groupTitle) {
-      var titles = document.querySelectorAll('.standings-group-title');
-      for (var i = 0; i < titles.length; i++) {
-        if (titles[i].textContent.trim() === groupTitle) {
-          return titles[i].closest('.standings-group').querySelector('tbody');
-        }
-      }
-      return null;
-    }
-
-    /* --- tbody にデータを描画 --- */
-    function renderGroupTbody(groupTitle, rows) {
-      var tbody = getTbodyByGroup(groupTitle);
-      if (!tbody) return;
-      var sorted = sortRows(rows);
-      tbody.innerHTML = sorted.map(function(cols) {
-        return '<tr>' + cols.map(function(c) {
-          return '<td>' + (c !== '' ? c : '-') + '</td>';
-        }).join('') + '</tr>';
-      }).join('');
-    }
-
-    /* --- 1シート分を fetch して callback に渡す --- */
-    function loadSheet(sheetName, onSuccess) {
+    function loadSheet(sheetName, cb) {
       var url = 'https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID +
                 '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(sheetName);
       fetch(url)
-        .then(function(res) { if (!res.ok) throw new Error(res.status); return res.text(); })
-        .then(function(text) {
-          var rows = parseCSV(text);
-          if (rows.length >= 2) onSuccess(rows.slice(1)); // 1行目はヘッダーなのでスキップ
-        })
-        .catch(function() {}); // シート未公開時はスタティック表示を維持
+        .then(function(r) { if (!r.ok) throw 0; return r.text(); })
+        .then(function(t) { cb(parseCSV(t).slice(1)); })  /* 1行目=ヘッダーをスキップ */
+        .catch(function() {});
     }
 
-    /* --- 4グループ分を一括ロード --- */
-    function loadAllStandings() {
-      loadSheet('U8_A', function(r) { renderGroupTbody('GROUP A', r); });
-      loadSheet('U8_B', function(r) { renderGroupTbody('GROUP B', r); });
-      loadSheet('U8_C', function(r) { renderGroupTbody('GROUP C', r); });
-      loadSheet('U8_D', function(r) { renderGroupTbody('GROUP D', r); });
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      /* スプレッドシート連携：初回ロード＋30秒ごとに自動更新 */
-      loadAllStandings();
-      setInterval(loadAllStandings, 30000);
-
-      /* ハンバーガーメニュー */
-      var hamburger = document.getElementById('hamburger');
-      var mobileMenu = document.getElementById('mobile-menu');
-
-      hamburger.addEventListener('click', function () {
-        var isOpen = mobileMenu.classList.toggle('open');
-        hamburger.classList.toggle('open', isOpen);
-        hamburger.setAttribute('aria-expanded', String(isOpen));
+    /* ========== スケジュール更新 ========== */
+    function updateScheduleCells() {
+      /* result セル: A(0)=group B(1)=home C(2)=homeScore D(3)=awayScore E(4)=away */
+      document.querySelectorAll('.match-cell[data-sheet="result"]').forEach(function(cell) {
+        var idx = parseInt(cell.dataset.row, 10);
+        var rows = cache.result;
+        if (!rows || !rows[idx]) return;
+        var r = rows[idx];
+        var home = r[1] || '—';
+        var away = r[4] || '—';
+        var hs   = r[2];
+        var as_  = r[3];
+        cell.querySelector('.home-team').textContent = home;
+        cell.querySelector('.away-team').textContent = away;
+        var sd = cell.querySelector('.score-display');
+        if (hs !== '' && as_ !== '') {
+          sd.textContent = hs + ' - ' + as_;
+          sd.classList.add('has-score');
+        } else {
+          sd.textContent = 'vs';
+          sd.classList.remove('has-score');
+        }
       });
 
-      mobileMenu.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () {
+      /* tourn セル: B(1)=home C(2)=homeScore E(4)=away F(5)=awayScore */
+      document.querySelectorAll('.match-cell[data-sheet="tourn"]').forEach(function(cell) {
+        var idx = parseInt(cell.dataset.row, 10);
+        var rows = cache.tourn;
+        if (!rows || !rows[idx]) return;
+        var r = rows[idx];
+        var home = r[1] || '—';
+        var away = r[4] || '—';
+        var hs   = r[2];
+        var as_  = r[5];
+        cell.querySelector('.home-team').textContent = home;
+        cell.querySelector('.away-team').textContent = away;
+        var sd = cell.querySelector('.score-display');
+        if (hs !== '' && as_ !== '') {
+          sd.textContent = hs + ' - ' + as_;
+          sd.classList.add('has-score');
+        } else {
+          sd.textContent = 'vs';
+          sd.classList.remove('has-score');
+        }
+      });
+
+      var now = new Date();
+      var ts = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+      var el = document.getElementById('schedule-updated');
+      if (el) el.textContent = '最終更新: ' + ts;
+    }
+
+    /* ========== 順位表更新 ========== */
+    /* 列マッピング: J(idx9)=順位 A(0)=チーム名 I(8)=勝点 H(7)=得失差 B(1)=試合 C(2)=勝 D(3)=分 E(4)=負 F(5)=得点 G(6)=失点 */
+    var COL_MAP = [9, 0, 8, 7, 1, 2, 3, 4, 5, 6];
+
+    function renderStandings(tbodyId, rows) {
+      var tbody = document.getElementById(tbodyId);
+      if (!tbody || !rows.length) return;
+      /* 勝点(idx8)降順→得失差(idx7)→得点(idx5) */
+      var sorted = rows.slice().sort(function(a, b) {
+        var d = (parseFloat(b[8])||0) - (parseFloat(a[8])||0);
+        if (d) return d;
+        d = (parseFloat(b[7])||0) - (parseFloat(a[7])||0);
+        if (d) return d;
+        return (parseFloat(b[5])||0) - (parseFloat(a[5])||0);
+      });
+      tbody.innerHTML = sorted.map(function(r, i) {
+        var rankVal = r[9] !== undefined ? r[9] : (i + 1);
+        if (rankVal === '' || rankVal === undefined) rankVal = i + 1;
+        var rankClass = rankVal == 1 ? 'rank-1' : rankVal == 2 ? 'rank-2' : rankVal == 3 ? 'rank-3' : 'rank-other';
+        var cells = COL_MAP.map(function(ci, colIdx) {
+          var v = (r[ci] !== undefined && r[ci] !== '') ? r[ci] : '—';
+          if (colIdx === 0) { /* 順位列: バッジ表示 */
+            return '<td><span class="rank-badge ' + rankClass + '">' + v + '</span></td>';
+          }
+          return '<td>' + v + '</td>';
+        });
+        return '<tr>' + cells.join('') + '</tr>';
+      }).join('');
+    }
+
+    /* ========== トーナメント表示 ========== */
+    var TOURN_DEFS = [
+      { rank: 1, label: '1位トーナメント', cls: 'tg-rank1',
+        matches: [
+          { idx: 4, label: '準決勝1', time: '10:55' },
+          { idx: 5, label: '準決勝2', time: '10:55' },
+          { idx: 12, label: '1位決定戦', time: '11:45' },
+          { idx: 13, label: '3位決定戦', time: '11:45' }
+        ]
+      },
+      { rank: 2, label: '2位トーナメント', cls: 'tg-rank2',
+        matches: [
+          { idx: 6, label: '準決勝1', time: '10:55' },
+          { idx: 7, label: '準決勝2', time: '10:55' },
+          { idx: 14, label: '5位決定戦', time: '11:45' },
+          { idx: 15, label: '7位決定戦', time: '11:45' }
+        ]
+      },
+      { rank: 3, label: '3位トーナメント', cls: 'tg-rank3',
+        matches: [
+          { idx: 0, label: '準決勝1', time: '10:30' },
+          { idx: 1, label: '準決勝2', time: '10:30' },
+          { idx: 8,  label: '9位決定戦',  time: '11:20' },
+          { idx: 9,  label: '11位決定戦', time: '11:20' }
+        ]
+      },
+      { rank: 4, label: '4位トーナメント', cls: 'tg-rank4',
+        matches: [
+          { idx: 2, label: '準決勝1', time: '10:30' },
+          { idx: 3, label: '準決勝2', time: '10:30' },
+          { idx: 10, label: '13位決定戦', time: '11:20' },
+          { idx: 11, label: '15位決定戦', time: '11:20' }
+        ]
+      }
+    ];
+
+    function isGroupStageDone(resultRows) {
+      for (var i = 0; i < 24; i++) {
+        var r = resultRows[i];
+        if (!r || r[2] === '' || r[3] === '') return false;
+      }
+      return true;
+    }
+
+    function renderTournament(tournRows, resultRows) {
+      var container = document.getElementById('tournament-content');
+      if (!container) return;
+
+      if (!isGroupStageDone(resultRows || [])) {
+        container.innerHTML = '<div class="tourn-pending"><p style="font-size:1.4rem;margin-bottom:12px;">⏳</p>グループリーグ終了後に表示</div>';
+        return;
+      }
+
+      var html = '<div class="tourn-grid">';
+      TOURN_DEFS.forEach(function(group) {
+        html += '<div class="tourn-group">';
+        html += '<div class="tourn-group-header ' + group.cls + '">' + group.label + '</div>';
+        group.matches.forEach(function(m) {
+          var r = tournRows && tournRows[m.idx];
+          var home  = r ? (r[1] || '—') : '—';
+          var away  = r ? (r[4] || '—') : '—';
+          var hs    = r ? r[2] : '';
+          var as_   = r ? r[5] : '';
+          html += '<div class="tourn-match">';
+          html += '<div class="tourn-match-label">' + m.label + '<span class="tourn-match-time">' + m.time + '</span></div>';
+          html += '<div class="tourn-teams">' + home + ' <span class="tourn-vs">vs</span> ' + away + '</div>';
+          if (hs !== '' && as_ !== '') {
+            html += '<div class="tourn-score">' + hs + ' - ' + as_ + '</div>';
+          }
+          html += '</div>';
+        });
+        html += '</div>';
+      });
+      html += '</div>';
+      container.innerHTML = html;
+
+      var now = new Date();
+      var ts = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+      var el = document.getElementById('tourn-updated');
+      if (el) el.textContent = '最終更新: ' + ts;
+    }
+
+    /* ========== メインロード ========== */
+    function loadAll() {
+      var loaded = { result: false, tourn: false, A: false, B: false, C: false, D: false };
+
+      function tryRenderTournament() {
+        if (loaded.result && loaded.tourn) {
+          renderTournament(cache.tourn, cache.result);
+        }
+      }
+
+      loadSheet('U8_結果', function(rows) {
+        cache.result = rows;
+        loaded.result = true;
+        updateScheduleCells();
+        tryRenderTournament();
+      });
+
+      loadSheet('U8_トーナメント', function(rows) {
+        cache.tourn = rows;
+        loaded.tourn = true;
+        updateScheduleCells();
+        tryRenderTournament();
+      });
+
+      loadSheet('U8_A', function(rows) { renderStandings('tbody-A', rows); });
+      loadSheet('U8_B', function(rows) { renderStandings('tbody-B', rows); });
+      loadSheet('U8_C', function(rows) { renderStandings('tbody-C', rows); });
+      loadSheet('U8_D', function(rows) { renderStandings('tbody-D', rows); });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      loadAll();
+      setInterval(loadAll, 30000);
+
+      /* ハンバーガー */
+      var hamburger = document.getElementById('hamburger');
+      var mobileMenu = document.getElementById('mobile-menu');
+      hamburger.addEventListener('click', function() {
+        var open = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', String(open));
+      });
+      mobileMenu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
           mobileMenu.classList.remove('open');
           hamburger.classList.remove('open');
           hamburger.setAttribute('aria-expanded', 'false');
@@ -920,21 +656,18 @@
       });
 
       /* スムーススクロール */
-      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-        anchor.addEventListener('click', function (e) {
-          var target = document.querySelector(this.getAttribute('href'));
-          if (target) {
+      document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          var t = document.querySelector(this.getAttribute('href'));
+          if (t) {
             e.preventDefault();
-            var navH    = document.querySelector('.site-nav').offsetHeight;
-            var noticeH = document.querySelector('.notice-banner').offsetHeight;
-            var offset  = navH + noticeH + 12;
-            var top     = target.getBoundingClientRect().top + window.pageYOffset - offset;
-            window.scrollTo({ top: top, behavior: 'smooth' });
+            var off = document.querySelector('.site-nav').offsetHeight +
+                      document.querySelector('.notice-banner').offsetHeight + 12;
+            window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - off, behavior: 'smooth' });
           }
         });
       });
     });
   </script>
-
 </body>
 </html>
