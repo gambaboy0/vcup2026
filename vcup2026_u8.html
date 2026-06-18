@@ -150,8 +150,8 @@
       <ul class="nav-links" role="list">
         <li><a href="#teams">チーム・組合せ</a></li>
         <li><a href="#schedule">試合スケジュール</a></li>
-        <li><a href="#standings">順位表</a></li>
-        <li><a href="#tournament">トーナメント</a></li>
+        <li><a href="#standings">GL順位表</a></li>
+        <li><a href="#tournament">順位決定トーナメント</a></li>
         <li><a href="#final-standings">最終順位</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
@@ -161,8 +161,8 @@
     <div class="mobile-menu" id="mobile-menu" role="menu">
       <a href="#teams" role="menuitem">チーム・組合せ</a>
       <a href="#schedule" role="menuitem">試合スケジュール</a>
-      <a href="#standings" role="menuitem">順位表</a>
-      <a href="#tournament" role="menuitem">トーナメント</a>
+      <a href="#standings" role="menuitem">GL順位表</a>
+      <a href="#tournament" role="menuitem">順位決定トーナメント</a>
       <a href="#final-standings" role="menuitem">最終順位</a>
     </div>
   </nav>
@@ -332,7 +332,7 @@
   <!-- Standings -->
   <section id="standings">
     <div class="container">
-      <h2 class="section-title">順位表</h2>
+      <h2 class="section-title">GL順位表</h2>
 
       <div class="standings-group">
         <div class="standings-group-title">GROUP A</div>
@@ -400,7 +400,7 @@
   <!-- Tournament -->
   <section id="tournament">
     <div class="container">
-      <h2 class="section-title">トーナメント</h2>
+      <h2 class="section-title">順位決定トーナメント</h2>
       <div id="tournament-content">
         <div class="tourn-pending">
           <p style="font-size:1.4rem;margin-bottom:12px;">⏳</p>
@@ -483,31 +483,44 @@
         }
       });
 
-      /* tourn セル: B(1)=home C(2)=homeScore D(3)=homePK E(4)=awayPK F(5)=awayScore G(6)=away */
-      document.querySelectorAll('.match-cell[data-sheet="tourn"]').forEach(function(cell) {
-        var idx = parseInt(cell.dataset.row, 10);
-        var rows = cache.tourn;
-        if (!rows || !rows[idx]) return;
-        var r    = rows[idx];
-        var home = r[1] || '—';
-        var away = r[6] || '—';
-        var hs   = r[2];
-        var as_  = r[5];
-        var hpk  = r[3];
-        var apk  = r[4];
-        cell.querySelector('.home-team').textContent = home;
-        cell.querySelector('.away-team').textContent = away;
-        var sd = cell.querySelector('.score-display');
-        if (hs !== '' && as_ !== '') {
-          var txt = hs + ' - ' + as_;
-          if (hpk !== '' && apk !== '') txt += '（PK ' + hpk + '-' + apk + '）';
-          sd.textContent = txt;
-          sd.classList.add('has-score');
-        } else {
-          sd.textContent = 'vs';
-          sd.classList.remove('has-score');
-        }
-      });
+      /* tourn セル
+         U8_トーナメントシート列構成（0始まり）:
+         A(0)=試合名 / B(1)=ホームチーム / C(2)=ホームスコア /
+         D(3)=ホームPKスコア / E(4)=アウェイPKスコア /
+         F(5)=アウェイスコア / G(6)=アウェイチーム              */
+      if (cache.tourn) {
+        document.querySelectorAll('.match-cell[data-sheet="tourn"]').forEach(function(cell) {
+          var idx = parseInt(cell.dataset.row, 10);
+          var r   = cache.tourn[idx];
+          if (!r) return;
+
+          /* チーム名 */
+          var homeName = r[1] || '—';   /* B列 */
+          var awayName = r[6] || '—';   /* G列 */
+          /* スコア */
+          var homeScore = r[2];          /* C列 */
+          var awayScore = r[5];          /* F列 */
+          /* PKスコア */
+          var homePK    = r[3];          /* D列 */
+          var awayPK    = r[4];          /* E列 */
+
+          cell.querySelector('.home-team').textContent = homeName;
+          cell.querySelector('.away-team').textContent = awayName;
+
+          var sd = cell.querySelector('.score-display');
+          if (homeScore !== '' && awayScore !== '') {
+            var txt = homeScore + ' - ' + awayScore;
+            if (homePK !== '' && awayPK !== '') {
+              txt += '（PK ' + homePK + '-' + awayPK + '）';
+            }
+            sd.textContent = txt;
+            sd.classList.add('has-score');
+          } else {
+            sd.textContent = 'vs';
+            sd.classList.remove('has-score');
+          }
+        });
+      }
 
       var now = new Date();
       var ts = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
@@ -603,19 +616,28 @@
         html += '<div class="tourn-group">';
         html += '<div class="tourn-group-header ' + group.cls + '">' + group.label + '</div>';
         group.matches.forEach(function(m) {
-          var r    = tournRows && tournRows[m.idx];
-          var home = r ? (r[1] || '—') : '—';
-          var away = r ? (r[6] || '—') : '—';
-          var hs   = r ? r[2] : '';
-          var as_  = r ? r[5] : '';
-          var hpk  = r ? r[3] : '';
-          var apk  = r ? r[4] : '';
+          /* U8_トーナメントシート列構成（0始まり）:
+             A(0)=試合名 / B(1)=ホームチーム / C(2)=ホームスコア /
+             D(3)=ホームPKスコア / E(4)=アウェイPKスコア /
+             F(5)=アウェイスコア / G(6)=アウェイチーム */
+          var r         = tournRows && tournRows[m.idx];
+          var homeName  = r ? (r[1] || '—') : '—';   /* B列 */
+          var awayName  = r ? (r[6] || '—') : '—';   /* G列 */
+          var homeScore = r ? r[2] : '';              /* C列 */
+          var awayScore = r ? r[5] : '';              /* F列 */
+          var homePK    = r ? r[3] : '';              /* D列 */
+          var awayPK    = r ? r[4] : '';              /* E列 */
+
           html += '<div class="tourn-match">';
-          html += '<div class="tourn-match-label">' + m.label + '<span class="tourn-match-time">' + m.time + '</span></div>';
-          html += '<div class="tourn-teams">' + home + ' <span class="tourn-vs">vs</span> ' + away + '</div>';
-          if (hs !== '' && as_ !== '') {
-            var scoreStr = hs + ' - ' + as_;
-            if (hpk !== '' && apk !== '') scoreStr += '（PK ' + hpk + '-' + apk + '）';
+          html += '<div class="tourn-match-label">' + m.label +
+                  '<span class="tourn-match-time">' + m.time + '</span></div>';
+          html += '<div class="tourn-teams">' + homeName +
+                  ' <span class="tourn-vs">vs</span> ' + awayName + '</div>';
+          if (homeScore !== '' && awayScore !== '') {
+            var scoreStr = homeScore + ' - ' + awayScore;
+            if (homePK !== '' && awayPK !== '') {
+              scoreStr += '（PK ' + homePK + '-' + awayPK + '）';
+            }
             html += '<div class="tourn-score">' + scoreStr + '</div>';
           }
           html += '</div>';
