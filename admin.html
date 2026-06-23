@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V CUP 管理者入力 | スコア入力</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1A3A6C;
+      --primary-dark: #0f2347;
+      --accent: #E86A1A;
+      --white: #FFFFFF;
+      --bg: #F4F7FB;
+      --card: #FFFFFF;
+      --text: #1A1A2E;
+      --muted: #6B7280;
+      --border: #E5E9F2;
+      --success: #166534;
+      --success-bg: #DCFCE7;
+      --error: #DC2626;
+      --error-bg: #FEE2E2;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    /* ===== Header ===== */
+    .admin-header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .admin-header h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .admin-header .back-link {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 5px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ===== Main ===== */
+    .admin-main {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* ===== Card ===== */
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 22px 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title span.step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ===== Login ===== */
+    #login-screen { display: block; }
+    #main-screen { display: none; }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.18s;
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.18s;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .form-select:focus { outline: none; border-color: var(--primary); }
+
+    /* ===== Category Toggle ===== */
+    .category-toggle {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .cat-btn {
+      flex: 1;
+      padding: 14px 10px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--muted);
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    .cat-btn.active {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #EEF3FA;
+    }
+
+    /* ===== Score Input ===== */
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .score-team-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--muted);
+      width: 56px;
+      flex-shrink: 0;
+    }
+
+    .score-input {
+      width: 80px;
+      padding: 14px 10px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--text);
+      text-align: center;
+      -webkit-appearance: none;
+      background: var(--white);
+    }
+    .score-input:focus { outline: none; border-color: var(--primary); }
+
+    .score-vs {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .score-team-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ===== PK Section ===== */
+    .pk-section {
+      display: none;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: 4px;
+    }
+
+    .pk-section.visible { display: block; }
+
+    .pk-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== Toggle Switch ===== */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .toggle-label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: var(--border);
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+
+    .toggle-slider::before {
+      position: absolute;
+      content: "";
+      height: 20px; width: 20px;
+      left: 3px; bottom: 3px;
+      background: var(--white);
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+
+    .toggle-switch input:checked + .toggle-slider { background: var(--accent); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+    /* ===== Buttons ===== */
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.12s;
+      margin-top: 6px;
+    }
+
+    .btn-submit:hover { background: #c4570f; }
+    .btn-submit:active { transform: scale(0.98); }
+    .btn-submit:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
+
+    .btn-primary {
+      width: 100%;
+      padding: 15px;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+
+    .btn-primary:hover { background: var(--primary-dark); }
+
+    /* ===== Alert Messages ===== */
+    .alert {
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .alert.visible { display: block; }
+    .alert-success { background: var(--success-bg); color: var(--success); }
+    .alert-error { background: var(--error-bg); color: var(--error); }
+
+    /* ===== Match Info Display ===== */
+    .match-info-box {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 13px 14px;
+      margin-bottom: 16px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      display: none;
+    }
+
+    .match-info-box.visible { display: block; }
+
+    .match-info-box .match-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    /* ===== GAS URL Notice ===== */
+    .setup-notice {
+      background: #FFF3CD;
+      border: 1px solid #FBBF24;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-size: 0.82rem;
+      color: #78350F;
+      line-height: 1.6;
+    }
+
+    .setup-notice strong { display: block; margin-bottom: 4px; font-size: 0.88rem; }
+
+    .setup-notice code {
+      display: block;
+      background: rgba(0,0,0,0.08);
+      padding: 6px 8px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 0.78rem;
+      margin-top: 6px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="admin-header">
+    <h1>⚽ V CUP 管理者<br>スコア入力</h1>
+    <a href="index.html" class="back-link">← サイトへ</a>
+  </header>
+
+  <main class="admin-main">
+
+    <!-- ===== ログイン画面 ===== -->
+    <div id="login-screen">
+      <div class="card">
+        <div class="card-title">
+          <span class="step">🔑</span>
+          ログイン
+        </div>
+        <div id="login-alert" class="alert alert-error">パスワードが正しくありません</div>
+        <div class="form-group">
+          <label class="form-label" for="password-input">パスワード</label>
+          <input
+            type="password"
+            id="password-input"
+            class="form-input"
+            placeholder="管理者パスワードを入力"
+            autocomplete="current-password"
+          >
+        </div>
+        <button class="btn-primary" onclick="doLogin()">ログイン</button>
+      </div>
+
+      <div class="setup-notice">
+        <strong>⚙️ セットアップが必要な場合</strong>
+        GAS（Google Apps Script）をデプロイしてから、このファイル内の
+        <code>GAS_URL</code> にウェブアプリURLを、<code>ADMIN_PASSWORD</code> にパスワードを設定してください。
+      </div>
+    </div>
+
+    <!-- ===== メイン画面 ===== -->
+    <div id="main-screen">
+
+      <!-- Step 1: カテゴリ選択 -->
+      <div class="card">
+        <div class="card-title">
+          <span class="step">1</span>
+          カテゴリ選択
+        </div>
+        <div class="category-toggle">
+          <button class="cat-btn active" id="btn-u8" onclick="selectCategory('U8')">U8 午前</button>
+          <button class="cat-btn" id="btn-u9" onclick="selectCategory('U9')">U9 午後</button>
+        </div>
+      </div>
+
+      <!-- Step 2: 試合選択 -->
+      <div class="card">
+        <div class="card-title">
+          <span class="step">2</span>
+          試合選択
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="match-select">試合を選んでください</label>
+          <select id="match-select" class="form-select" onchange="onMatchSelect()">
+            <option value="">-- 試合を選択 --</option>
+          </select>
+        </div>
+        <div class="match-info-box" id="match-info">
+          <div class="match-name" id="match-name-display">—</div>
+          <div id="match-time-display" style="font-size:0.8rem;color:var(--muted);">—</div>
+        </div>
+      </div>
+
+      <!-- Step 3: スコア入力 -->
+      <div class="card">
+        <div class="card-title">
+          <span class="step">3</span>
+          スコア入力
+        </div>
+
+        <div id="submit-alert-success" class="alert alert-success">✅ 送信しました！スプレッドシートに反映されます。</div>
+        <div id="submit-alert-error" class="alert alert-error">❌ 送信に失敗しました。GAS URLを確認してください。</div>
+
+        <!-- ホーム -->
+        <div class="score-row">
+          <div class="score-team-label">ホーム</div>
+          <input type="number" id="home-score" class="score-input" placeholder="0" min="0" max="99">
+          <div class="score-vs">—</div>
+          <input type="number" id="away-score" class="score-input" placeholder="0" min="0" max="99">
+          <div class="score-team-label" style="width:56px;text-align:right;">アウェイ</div>
+        </div>
+
+        <div class="score-row" style="margin-top:4px;margin-bottom:16px;">
+          <div class="score-team-label"></div>
+          <div class="score-team-name" id="home-team-name" style="text-align:center;width:80px;font-size:0.78rem;">—</div>
+          <div style="width:10px;"></div>
+          <div class="score-team-name" id="away-team-name" style="text-align:center;width:80px;font-size:0.78rem;">—</div>
+          <div style="width:56px;"></div>
+        </div>
+
+        <!-- PK戦（U9 / 引き分け時） -->
+        <div class="toggle-row" id="pk-toggle-row" style="display:none;">
+          <label class="toggle-switch">
+            <input type="checkbox" id="pk-toggle" onchange="togglePK()">
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="toggle-label">PK戦あり（引き分けの場合）</span>
+        </div>
+
+        <div class="pk-section" id="pk-section">
+          <div class="pk-label">PK スコア</div>
+          <div class="score-row">
+            <div class="score-team-label">ホーム</div>
+            <input type="number" id="home-pk" class="score-input" placeholder="0" min="0" max="20">
+            <div class="score-vs">—</div>
+            <input type="number" id="away-pk" class="score-input" placeholder="0" min="0" max="20">
+            <div class="score-team-label" style="width:56px;text-align:right;">アウェイ</div>
+          </div>
+        </div>
+
+        <button class="btn-submit" id="submit-btn" onclick="submitScore()" disabled>
+          送信する
+        </button>
+      </div>
+
+      <div style="text-align:center;margin-top:4px;">
+        <button onclick="doLogout()" style="background:none;border:none;color:var(--muted);font-size:0.82rem;cursor:pointer;font-family:inherit;padding:8px;">
+          ログアウト
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    /* ================================================================
+       設定 — GAS をデプロイしたら以下を書き換えてください
+    ================================================================ */
+    var GAS_URL = "https://script.google.com/macros/s/AKfycbxtis2dMFqlYHKE70t7d1_76Z9Jd67psudc7UEbahwsdX6ZZ1NsZ6hgkCMVQfV1NqH-/exec";
+    var ADMIN_PASSWORD = "vcup2026";   /* ← GAS 側と同じパスワードに変更 */
+
+    /* ================================================================
+       試合定義データ（新シート構成）
+       シート: "U8試合結果"  列: F=ホームスコア(6) G=ホームPK(7) H=アウェイPK(8) I=アウェイスコア(9)
+       行番号: GL=2〜25行目  トーナメント=26〜41行目
+    ================================================================ */
+    var U8_MATCHES = [
+      /* ===== グループリーグ（行2〜25） ===== */
+      {label:"A第1試合", time:"8:00",  sheet:"U8試合結果", row:2,  homeCol:6, awayCol:9, homeName:"富山中央SC",       awayName:"BEZERRO",          isPK:false},
+      {label:"A第2試合", time:"8:00",  sheet:"U8試合結果", row:3,  homeCol:6, awayCol:9, homeName:"みなみFC",         awayName:"FC滑川",           isPK:false},
+      {label:"B第1試合", time:"8:00",  sheet:"U8試合結果", row:4,  homeCol:6, awayCol:9, homeName:"ヴァリエンテ富山", awayName:"大久保少年サッカー",isPK:false},
+      {label:"B第2試合", time:"8:00",  sheet:"U8試合結果", row:5,  homeCol:6, awayCol:9, homeName:"石動大谷",         awayName:"EST小杉",          isPK:false},
+      {label:"C第1試合", time:"8:25",  sheet:"U8試合結果", row:6,  homeCol:6, awayCol:9, homeName:"鵜坂",             awayName:"ELITE JAPAN",      isPK:false},
+      {label:"C第2試合", time:"8:25",  sheet:"U8試合結果", row:7,  homeCol:6, awayCol:9, homeName:"プリマヴェーラ入善",awayName:"スフィーダ",       isPK:false},
+      {label:"D第1試合", time:"8:25",  sheet:"U8試合結果", row:8,  homeCol:6, awayCol:9, homeName:"TOLL",             awayName:"ALVA",             isPK:false},
+      {label:"D第2試合", time:"8:25",  sheet:"U8試合結果", row:9,  homeCol:6, awayCol:9, homeName:"CAMPIONE FUKUOKA", awayName:"蜷川",             isPK:false},
+      {label:"A第3試合", time:"8:50",  sheet:"U8試合結果", row:10, homeCol:6, awayCol:9, homeName:"富山中央SC",       awayName:"みなみFC",         isPK:false},
+      {label:"A第4試合", time:"8:50",  sheet:"U8試合結果", row:11, homeCol:6, awayCol:9, homeName:"BEZERRO",          awayName:"FC滑川",           isPK:false},
+      {label:"B第3試合", time:"8:50",  sheet:"U8試合結果", row:12, homeCol:6, awayCol:9, homeName:"ヴァリエンテ富山", awayName:"石動大谷",         isPK:false},
+      {label:"B第4試合", time:"8:50",  sheet:"U8試合結果", row:13, homeCol:6, awayCol:9, homeName:"大久保少年サッカー",awayName:"EST小杉",          isPK:false},
+      {label:"C第3試合", time:"9:15",  sheet:"U8試合結果", row:14, homeCol:6, awayCol:9, homeName:"鵜坂",             awayName:"プリマヴェーラ入善",isPK:false},
+      {label:"C第4試合", time:"9:15",  sheet:"U8試合結果", row:15, homeCol:6, awayCol:9, homeName:"ELITE JAPAN",      awayName:"スフィーダ",       isPK:false},
+      {label:"D第3試合", time:"9:15",  sheet:"U8試合結果", row:16, homeCol:6, awayCol:9, homeName:"TOLL",             awayName:"CAMPIONE FUKUOKA", isPK:false},
+      {label:"D第4試合", time:"9:15",  sheet:"U8試合結果", row:17, homeCol:6, awayCol:9, homeName:"ALVA",             awayName:"蜷川",             isPK:false},
+      {label:"A第5試合", time:"9:40",  sheet:"U8試合結果", row:18, homeCol:6, awayCol:9, homeName:"富山中央SC",       awayName:"FC滑川",           isPK:false},
+      {label:"A第6試合", time:"9:40",  sheet:"U8試合結果", row:19, homeCol:6, awayCol:9, homeName:"BEZERRO",          awayName:"みなみFC",         isPK:false},
+      {label:"B第5試合", time:"9:40",  sheet:"U8試合結果", row:20, homeCol:6, awayCol:9, homeName:"ヴァリエンテ富山", awayName:"EST小杉",          isPK:false},
+      {label:"B第6試合", time:"9:40",  sheet:"U8試合結果", row:21, homeCol:6, awayCol:9, homeName:"大久保少年サッカー",awayName:"石動大谷",         isPK:false},
+      {label:"C第5試合", time:"10:05", sheet:"U8試合結果", row:22, homeCol:6, awayCol:9, homeName:"鵜坂",             awayName:"スフィーダ",       isPK:false},
+      {label:"C第6試合", time:"10:05", sheet:"U8試合結果", row:23, homeCol:6, awayCol:9, homeName:"ELITE JAPAN",      awayName:"プリマヴェーラ入善",isPK:false},
+      {label:"D第5試合", time:"10:05", sheet:"U8試合結果", row:24, homeCol:6, awayCol:9, homeName:"TOLL",             awayName:"蜷川",             isPK:false},
+      {label:"D第6試合", time:"10:05", sheet:"U8試合結果", row:25, homeCol:6, awayCol:9, homeName:"ALVA",             awayName:"CAMPIONE FUKUOKA", isPK:false},
+      /* ===== トーナメント（行26〜41）PK対応 ===== */
+      {label:"3位T準決勝1", time:"10:30", sheet:"U8試合結果", row:26, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"3位T準決勝2", time:"10:30", sheet:"U8試合結果", row:27, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"4位T準決勝1", time:"10:30", sheet:"U8試合結果", row:28, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"4位T準決勝2", time:"10:30", sheet:"U8試合結果", row:29, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"1位T準決勝1", time:"10:55", sheet:"U8試合結果", row:30, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"1位T準決勝2", time:"10:55", sheet:"U8試合結果", row:31, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"2位T準決勝1", time:"10:55", sheet:"U8試合結果", row:32, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"2位T準決勝2", time:"10:55", sheet:"U8試合結果", row:33, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"9位決定戦",   time:"11:20", sheet:"U8試合結果", row:34, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"11位決定戦",  time:"11:20", sheet:"U8試合結果", row:35, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"13位決定戦",  time:"11:20", sheet:"U8試合結果", row:36, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"15位決定戦",  time:"11:20", sheet:"U8試合結果", row:37, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"1位決定戦",   time:"11:45", sheet:"U8試合結果", row:38, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"3位決定戦",   time:"11:45", sheet:"U8試合結果", row:39, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"5位決定戦",   time:"11:45", sheet:"U8試合結果", row:40, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+      {label:"7位決定戦",   time:"11:45", sheet:"U8試合結果", row:41, homeCol:6, awayCol:9, homePKCol:7, awayPKCol:8, homeName:"—", awayName:"—", isPK:true},
+    ];
+
+    /* U9 試合一覧（U9確定後に更新予定） */
+    var U9_MATCH_TEMPLATE = [];
+
+    /* ================================================================
+       状態変数
+    ================================================================ */
+    var currentCategory = 'U8';
+    var currentMatch = null;
+
+    /* ================================================================
+       ログイン処理
+    ================================================================ */
+    function doLogin() {
+      var pw = document.getElementById('password-input').value;
+      var alert = document.getElementById('login-alert');
+      if (pw === ADMIN_PASSWORD) {
+        sessionStorage.setItem('vcup_admin', '1');
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-screen').style.display = 'block';
+        alert.classList.remove('visible');
+        buildMatchList();
+      } else {
+        alert.classList.add('visible');
+        document.getElementById('password-input').value = '';
+        document.getElementById('password-input').focus();
+      }
+    }
+
+    function doLogout() {
+      sessionStorage.removeItem('vcup_admin');
+      document.getElementById('login-screen').style.display = 'block';
+      document.getElementById('main-screen').style.display = 'none';
+      document.getElementById('password-input').value = '';
+    }
+
+    document.getElementById('password-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doLogin();
+    });
+
+    /* 既にログイン済みなら自動復元 */
+    if (sessionStorage.getItem('vcup_admin') === '1') {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('main-screen').style.display = 'block';
+      setTimeout(buildMatchList, 0);
+    }
+
+    /* ================================================================
+       カテゴリ選択
+    ================================================================ */
+    function selectCategory(cat) {
+      currentCategory = cat;
+      document.getElementById('btn-u8').classList.toggle('active', cat === 'U8');
+      document.getElementById('btn-u9').classList.toggle('active', cat === 'U9');
+      buildMatchList();
+      resetScoreForm();
+    }
+
+    /* ================================================================
+       試合リスト構築
+    ================================================================ */
+    function buildMatchList() {
+      var sel = document.getElementById('match-select');
+      var matches = currentCategory === 'U8' ? U8_MATCHES : U9_MATCH_TEMPLATE;
+      sel.innerHTML = '<option value="">-- 試合を選択 --</option>';
+      matches.forEach(function(m, i) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = m.label + (m.time ? '（' + m.time + '）' : '');
+        sel.appendChild(opt);
+      });
+      document.getElementById('match-info').classList.remove('visible');
+      document.getElementById('submit-btn').disabled = true;
+    }
+
+    /* ================================================================
+       試合選択時
+    ================================================================ */
+    function onMatchSelect() {
+      var sel = document.getElementById('match-select');
+      var idx = parseInt(sel.value, 10);
+      var matches = currentCategory === 'U8' ? U8_MATCHES : U9_MATCH_TEMPLATE;
+
+      resetScoreForm();
+      hideAlerts();
+
+      if (isNaN(idx)) {
+        currentMatch = null;
+        document.getElementById('match-info').classList.remove('visible');
+        document.getElementById('submit-btn').disabled = true;
+        return;
+      }
+
+      currentMatch = matches[idx];
+      document.getElementById('home-team-name').textContent = currentMatch.homeName;
+      document.getElementById('away-team-name').textContent = currentMatch.awayName;
+      document.getElementById('match-name-display').textContent = currentMatch.label;
+      document.getElementById('match-time-display').textContent = currentMatch.time ? '⏱ ' + currentMatch.time : '';
+      document.getElementById('match-info').classList.add('visible');
+
+      /* U9 または PK あり試合はトグル表示 */
+      var pkRow = document.getElementById('pk-toggle-row');
+      pkRow.style.display = (currentMatch.isPK) ? 'flex' : 'none';
+      document.getElementById('pk-toggle').checked = false;
+      document.getElementById('pk-section').classList.remove('visible');
+
+      document.getElementById('submit-btn').disabled = false;
+      document.getElementById('home-score').value = '';
+      document.getElementById('away-score').value = '';
+      document.getElementById('home-pk').value = '';
+      document.getElementById('away-pk').value = '';
+      document.getElementById('home-score').focus();
+    }
+
+    function togglePK() {
+      var on = document.getElementById('pk-toggle').checked;
+      document.getElementById('pk-section').classList.toggle('visible', on);
+    }
+
+    function resetScoreForm() {
+      document.getElementById('home-score').value = '';
+      document.getElementById('away-score').value = '';
+      document.getElementById('home-pk').value = '';
+      document.getElementById('away-pk').value = '';
+      document.getElementById('home-team-name').textContent = '—';
+      document.getElementById('away-team-name').textContent = '—';
+      document.getElementById('pk-toggle-row').style.display = 'none';
+      document.getElementById('pk-toggle').checked = false;
+      document.getElementById('pk-section').classList.remove('visible');
+    }
+
+    function hideAlerts() {
+      document.getElementById('submit-alert-success').classList.remove('visible');
+      document.getElementById('submit-alert-error').classList.remove('visible');
+    }
+
+    /* ================================================================
+       スコア送信
+    ================================================================ */
+    function submitScore() {
+      if (!currentMatch) return;
+
+      var hs = document.getElementById('home-score').value;
+      var as_ = document.getElementById('away-score').value;
+
+      if (hs === '' || as_ === '') {
+        alert('スコアを両方入力してください');
+        return;
+      }
+
+      var btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = '送信中...';
+      hideAlerts();
+
+      var payload = {
+        password: ADMIN_PASSWORD,
+        sheet:    currentMatch.sheet,
+        row:      currentMatch.row,
+        homeCol:  currentMatch.homeCol,
+        awayCol:  currentMatch.awayCol,
+        homeScore: hs,
+        awayScore: as_
+      };
+
+      var pkOn = document.getElementById('pk-toggle').checked;
+      if (pkOn && currentMatch.isPK) {
+        var hp = document.getElementById('home-pk').value;
+        var ap = document.getElementById('away-pk').value;
+        if (hp !== '' && ap !== '') {
+          payload.homePKCol  = currentMatch.homePKCol;
+          payload.awayPKCol  = currentMatch.awayPKCol;
+          payload.homePK     = hp;
+          payload.awayPK     = ap;
+        }
+      }
+
+      fetch(GAS_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        btn.disabled = false;
+        btn.textContent = '送信する';
+        if (data.ok) {
+          document.getElementById('submit-alert-success').classList.add('visible');
+          /* 次の試合選択に戻る */
+          setTimeout(function() {
+            var sel = document.getElementById('match-select');
+            var next = parseInt(sel.value, 10) + 1;
+            var matches = currentCategory === 'U8' ? U8_MATCHES : U9_MATCH_TEMPLATE;
+            if (next < matches.length) {
+              sel.value = next;
+              onMatchSelect();
+            }
+          }, 1200);
+        } else {
+          document.getElementById('submit-alert-error').classList.add('visible');
+        }
+      })
+      .catch(function() {
+        btn.disabled = false;
+        btn.textContent = '送信する';
+        document.getElementById('submit-alert-error').classList.add('visible');
+      });
+    }
+  </script>
+</body>
+</html>
