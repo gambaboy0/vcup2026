@@ -7,16 +7,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --primary: #1A3A6C;
-      --primary-dark: #0f2347;
-      --accent: #E86A1A;
-      --accent-dark: #c4561200;
+      --primary: #1B6B2A;
+      --primary-dark: #0F4019;
+      --accent: #F5B400;
+      --accent-dark: #d49b00;
       --white: #FFFFFF;
-      --bg: #F4F7FB;
+      --bg: #EBF5FF;
       --card: #FFFFFF;
       --text: #1A1A2E;
       --muted: #6B7280;
@@ -30,7 +31,13 @@
     body {
       font-family: 'Noto Sans JP', sans-serif;
       color: var(--text);
-      background: var(--bg);
+      background:
+        radial-gradient(ellipse 600px 180px at 15% 8%, rgba(255,255,255,0.7) 0%, transparent 60%),
+        radial-gradient(ellipse 400px 120px at 70% 18%, rgba(255,255,255,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse 300px 90px at 88% 6%, rgba(255,255,255,0.5) 0%, transparent 60%),
+        radial-gradient(ellipse 250px 80px at 42% 28%, rgba(255,255,255,0.4) 0%, transparent 60%),
+        linear-gradient(to bottom, #87CEEA 0%, #A8D8F0 15%, #C0E5F8 35%, #D5EEF8 55%, #E5F5FC 75%, #EEF9FF 100%);
+      background-attachment: fixed;
       padding-top: var(--notice-h);
     }
 
@@ -53,7 +60,7 @@
     .site-header {
       position: relative;
       overflow: hidden;
-      min-height: calc(100vh - var(--notice-h));
+      min-height: calc(100svh - var(--notice-h));
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -173,7 +180,7 @@
       outline: none;
     }
 
-    .hero-btn.u8 { border-color: rgba(232,106,26,0.75); }
+    .hero-btn.u8 { border-color: rgba(245,180,0,0.75); }
     .hero-btn.u8:hover { border-color: var(--accent); }
 
     .btn-category {
@@ -232,7 +239,7 @@
       gap: 12px;
     }
     @media (min-width: 600px) {
-      .overview-grid { grid-template-columns: repeat(4, 1fr); }
+      .overview-grid { grid-template-columns: repeat(2, 1fr); max-width: 600px; }
     }
 
     .overview-card {
@@ -246,6 +253,8 @@
     }
 
     .ov-icon { font-size: 1.5rem; line-height: 1; }
+    .ov-icon i { font-size: 1.6rem; color: var(--primary); }
+    .info-card-icon i { color: var(--white); font-size: 1.1rem; }
     .ov-label {
       font-size: 0.72rem;
       color: var(--muted);
@@ -387,25 +396,39 @@
       margin-bottom: 6px;
     }
 
-    .parking-desc {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.55;
+    .parking-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
     }
-
-    .notice-box {
-      background: #FFF3CD;
-      border: 1px solid #FBBF24;
-      border-radius: 10px;
-      padding: 16px 18px;
-      margin-top: 14px;
-    }
-
-    .notice-box p {
+    .parking-list li {
       font-size: 0.84rem;
-      color: #78350F;
-      line-height: 1.6;
+      color: var(--text);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .parking-list li::before {
+      content: "・";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
       font-weight: 700;
+    }
+    .parking-list li.red {
+      color: #DC2626;
+      font-weight: 700;
+    }
+    .parking-list li.red::before { color: #DC2626; }
+
+    .map-img-full {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.15);
+      display: block;
+      margin-bottom: 20px;
     }
 
     /* ===== Water Info ===== */
@@ -447,7 +470,7 @@
 
   <!-- Hero Header -->
   <header class="site-header">
-    <img src="vcup_hero.jpg" alt="V CUP 2026 ヴァリエンテ富山ジュニア" class="hero-img">
+    <img src="カテゴリー背景.png" alt="V CUP 2026 ヴァリエンテ富山ジュニア" class="hero-img">
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="header-content">
       <p class="header-eyebrow">Valiente Toyama Junior Presents</p>
@@ -480,24 +503,14 @@
       <h2 class="section-title">大会概要</h2>
       <div class="overview-grid">
         <div class="overview-card">
-          <div class="ov-icon">📅</div>
+          <div class="ov-icon"><i class="fa-solid fa-calendar-days"></i></div>
           <div class="ov-label">開催日</div>
           <div class="ov-value">2026年7月18日（土）</div>
         </div>
         <div class="overview-card">
-          <div class="ov-icon">📍</div>
+          <div class="ov-icon"><i class="fa-solid fa-location-dot"></i></div>
           <div class="ov-label">会場</div>
           <div class="ov-value">薬勝寺池南公園<br>サッカー場</div>
-        </div>
-        <div class="overview-card">
-          <div class="ov-icon">💰</div>
-          <div class="ov-label">参加費</div>
-          <div class="ov-value">6,000円<br>／チーム・カテゴリー</div>
-        </div>
-        <div class="overview-card">
-          <div class="ov-icon">🏆</div>
-          <div class="ov-label">主催</div>
-          <div class="ov-value">ヴァリエンテ<br>富山ジュニア</div>
         </div>
       </div>
     </div>
@@ -506,11 +519,11 @@
   <!-- Rules -->
   <section style="padding-top: 0;">
     <div class="container">
-      <h2 class="section-title">競技ルール</h2>
+      <h2 class="section-title">お知らせ</h2>
       <div class="info-grid">
         <div class="info-card">
           <div class="info-card-header">
-            <div class="info-card-icon">⚽</div>
+            <div class="info-card-icon"><i class="fa-solid fa-futbol"></i></div>
             <div class="info-card-title">U8 — 午前の部</div>
           </div>
           <ul class="info-list">
@@ -522,7 +535,7 @@
         </div>
         <div class="info-card">
           <div class="info-card-header">
-            <div class="info-card-icon">⚽</div>
+            <div class="info-card-icon"><i class="fa-solid fa-futbol"></i></div>
             <div class="info-card-title">U9 — 午後の部</div>
           </div>
           <ul class="info-list">
@@ -534,7 +547,7 @@
         </div>
         <div class="info-card">
           <div class="info-card-header">
-            <div class="info-card-icon">📋</div>
+            <div class="info-card-icon"><i class="fa-solid fa-list-check"></i></div>
             <div class="info-card-title">共通ルール</div>
           </div>
           <ul class="info-list">
@@ -546,7 +559,7 @@
         </div>
         <div class="info-card">
           <div class="info-card-header">
-            <div class="info-card-icon">💧</div>
+            <div class="info-card-icon"><i class="fa-solid fa-droplet"></i></div>
             <div class="info-card-title">水の販売</div>
           </div>
           <ul class="info-list">
@@ -584,41 +597,48 @@
   <section style="padding-top: 0;">
     <div class="container">
       <h2 class="section-title">駐車場案内</h2>
+
+      <!-- 駐車場マップ（横幅いっぱい） -->
+      <img src="map_parking.png" alt="駐車場マップ" class="map-img-full">
+
+      <!-- 駐車場カード -->
       <div class="parking-grid">
         <div class="parking-card">
           <div class="parking-badge">C</div>
-          <div class="parking-name">駐車場 C（一般駐車）</div>
-          <div class="parking-desc">
-            参加チームの一般駐車場。<br>
-            <strong>1チーム最大13台まで</strong>（指導者は含まない）。<br>
-            全員が駐車場 C で降車して歩いてください。
-          </div>
+          <div class="parking-name">C 駐車場</div>
+          <ul class="parking-list">
+            <li>県内チーム保護者駐車場</li>
+            <li>1チーム13台まで駐車可能</li>
+            <li class="red">道路上での乗降り禁止</li>
+          </ul>
         </div>
         <div class="parking-card">
           <div class="parking-badge">D</div>
-          <div class="parking-name">駐車場 D（テント搬入）</div>
-          <div class="parking-desc">
-            テント等の搬入用に<strong>各チーム1台のみ</strong>使用可。<br>
-            7時に門を開放。<br>
-            降車後は速やかに駐車場 C へ移動してください。
-          </div>
+          <div class="parking-name">D 積降場</div>
+          <ul class="parking-list">
+            <li>7時開場</li>
+            <li>荷物積降専用</li>
+            <li class="red">積降後はC又はE駐車場へ移動</li>
+          </ul>
         </div>
         <div class="parking-card">
           <div class="parking-badge accent">E</div>
-          <div class="parking-name">駐車場 E（指導者・県外）</div>
-          <div class="parking-desc">
-            <strong>指導者の方は全員駐車場 E</strong> を使用。<br>
-            県外チーム（台数制限なし）もこちらへ。
-          </div>
+          <div class="parking-name">E 駐車場</div>
+          <ul class="parking-list">
+            <li>全指導者、県外保護者駐車場</li>
+            <li>台数制限なし</li>
+            <li class="red">道路上での乗降り禁止</li>
+          </ul>
         </div>
       </div>
-      <div class="notice-box">
-        <p>
-          ⚠️ 路上駐車は禁止です。会場前での選手の先降ろしはお辞めください。<br>
-          🚗 車は必ずアスファルト通路を通行してください。<br>
-          ⛺ チームテントは指定場所に設置をお願いします。
-        </p>
-      </div>
+    </div>
+  </section>
+
+  <!-- 会場配置図 -->
+  <section style="padding-top: 0;">
+    <div class="container">
+      <h2 class="section-title">会場配置図</h2>
+      <img src="map_court.png" alt="会場・コート配置図" class="map-img-full">
     </div>
   </section>
 
