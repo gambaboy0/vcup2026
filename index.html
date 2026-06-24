@@ -56,162 +56,153 @@
       line-height: 1.4;
     }
 
-    /* ===== Hero ===== */
+    /* ===== Hero（新デザイン） ===== */
     .site-header {
-      position: relative;
-      overflow: hidden;
       min-height: calc(100svh - var(--notice-h));
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      background: var(--primary);
-    }
-    @media (min-width: 768px) { .site-header { min-height: 700px; } }
-
-    .hero-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(10,30,70,0.15) 0%,
-        rgba(10,30,70,0.30) 40%,
-        rgba(10,30,70,0.78) 72%,
-        rgba(10,30,70,0.92) 100%
-      );
-    }
-
-    .header-content {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: var(--max-width);
-      padding: 24px 20px 48px;
-      text-align: center;
-    }
-
-    .header-eyebrow {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .header-title {
-      font-size: clamp(2.6rem, 10vw, 5.5rem);
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: 0.04em;
-      line-height: 1;
-      text-shadow: 0 3px 20px rgba(0,0,0,0.5);
-      margin-bottom: 8px;
-    }
-
-    .header-subtitle {
-      color: rgba(255,255,255,0.85);
-      font-size: clamp(0.88rem, 2.5vw, 1.1rem);
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: 0.03em;
-    }
-
-    .header-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      margin-bottom: 36px;
-    }
-
-    .header-meta span {
-      background: rgba(255,255,255,0.14);
-      color: var(--white);
-      padding: 6px 16px;
-      border-radius: 999px;
-      font-size: 0.84rem;
-      font-weight: 700;
-      border: 1px solid rgba(255,255,255,0.32);
-      backdrop-filter: blur(6px);
-    }
-
-    /* ===== Category Buttons ===== */
-    .hero-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-    @media (min-width: 480px) { .hero-buttons { flex-direction: row; } }
-
-    .hero-btn {
-      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      background: rgba(255,255,255,0.13);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 2px solid rgba(255,255,255,0.35);
-      border-radius: 16px;
-      padding: 22px 18px 18px;
-      text-decoration: none;
+      justify-content: space-between;
+      padding: 20px 16px 24px;
+      background: url('vcup_sky.jpg') center center / cover no-repeat;
+    }
+    @media (min-width: 768px) { .site-header { min-height: 860px; } }
+
+    .hero-content {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(10px, 2.5vw, 18px);
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    /* 上部テキスト */
+    .hero-eyebrow {
+      font-size: clamp(0.68rem, 2.2vw, 0.9rem);
+      font-weight: 700;
       color: var(--white);
-      transition: all 0.22s ease;
       text-align: center;
+      letter-spacing: 0.08em;
+      text-shadow: 0 1px 8px rgba(0,0,50,0.35);
     }
 
-    .hero-btn:hover, .hero-btn:focus {
-      background: rgba(255,255,255,0.22);
-      border-color: rgba(255,255,255,0.7);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 32px rgba(0,0,0,0.28);
-      outline: none;
+    /* エンブレム */
+    .hero-emblem {
+      width: clamp(100px, 28vw, 170px);
+      filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3));
     }
 
-    .hero-btn.u8 { border-color: rgba(245,180,0,0.75); }
-    .hero-btn.u8:hover { border-color: var(--accent); }
-
-    .btn-category {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.65);
-      text-transform: uppercase;
+    /* V CUP ＋ 日付 横並び */
+    .hero-title-row {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: flex-start;
     }
 
-    .btn-title {
-      font-size: clamp(1.3rem, 5vw, 1.7rem);
+    .hero-vcup-text {
+      font-size: clamp(2.8rem, 10vw, 4.5rem);
+      font-weight: 900;
+      color: #1565C0;
+      line-height: 1;
+      text-shadow: 0 2px 12px rgba(255,255,255,0.5);
+      letter-spacing: -0.02em;
+    }
+    .hero-vcup-sub {
+      font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+      color: rgba(255,255,255,0.9);
+      font-style: italic;
+      margin-top: 3px;
+    }
+
+    .hero-date { text-align: right; }
+    .hero-date-text {
+      font-size: clamp(2.2rem, 8vw, 3.8rem);
       font-weight: 700;
       color: var(--white);
-      line-height: 1.1;
+      line-height: 1;
+      text-shadow: 0 2px 12px rgba(0,0,80,0.25);
+    }
+    .hero-date-sub {
+      font-size: clamp(0.6rem, 1.8vw, 0.72rem);
+      color: rgba(255,255,255,0.85);
+      margin-top: 3px;
     }
 
-    .hero-btn.u8 .btn-title { color: var(--accent); }
-
-    .btn-sub {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.72);
-      margin-top: 2px;
+    /* カテゴリーボタン */
+    .hero-cat-btns {
+      display: flex;
+      gap: 10px;
+      width: 100%;
     }
 
-    .btn-arrow {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.7);
-      margin-top: 8px;
+    .hero-cat-btn {
+      flex: 1;
+      background: rgba(21,101,192,0.72);
+      border: 2px solid rgba(255,255,255,0.55);
+      border-radius: 10px;
+      padding: 14px 10px 12px;
+      text-decoration: none;
+      text-align: center;
+      backdrop-filter: blur(6px);
+      transition: all 0.2s;
     }
-    .hero-btn.u8 .btn-arrow { color: var(--accent); }
+    .hero-cat-btn:hover { background: rgba(21,101,192,0.92); transform: translateY(-2px); }
+
+    .hero-cat-title {
+      font-size: clamp(1.8rem, 7vw, 2.6rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .hero-cat-sub {
+      font-size: clamp(0.68rem, 2vw, 0.78rem);
+      color: rgba(255,255,255,0.85);
+      margin-top: 4px;
+    }
+
+    /* インフォメーション */
+    .hero-info { width: 100%; text-align: center; }
+
+    .hero-info-title {
+      font-size: clamp(1rem, 3.5vw, 1.4rem);
+      font-weight: 700;
+      color: var(--white);
+      font-style: italic;
+      letter-spacing: 0.1em;
+      text-shadow: 0 1px 8px rgba(0,0,50,0.3);
+    }
+    .hero-info-sub {
+      font-size: clamp(0.62rem, 1.8vw, 0.72rem);
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 8px;
+    }
+
+    .hero-info-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .hero-info-btn {
+      background: rgba(21,101,192,0.6);
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 8px;
+      padding: 11px 8px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: clamp(0.7rem, 2.2vw, 0.82rem);
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: center;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s;
+    }
+    .hero-info-btn:hover { background: rgba(21,101,192,0.85); }
 
     /* ===== Container ===== */
     .container {
@@ -470,35 +461,55 @@
 
   <!-- Hero Header -->
   <header class="site-header">
-    <img src="カテゴリー背景.png" alt="V CUP 2026 ヴァリエンテ富山ジュニア" class="hero-img">
-    <div class="hero-overlay" aria-hidden="true"></div>
-    <div class="header-content">
-      <p class="header-eyebrow">Valiente Toyama Junior Presents</p>
-      <h1 class="header-title">V CUP 2026</h1>
-      <p class="header-subtitle">ヴァリエンテ富山ジュニア 主催</p>
-      <div class="header-meta">
-        <span>📅 2026年7月18日（土）</span>
-        <span>📍 薬勝寺池南公園サッカー場</span>
+    <div class="hero-content">
+
+      <!-- 上部テキスト -->
+      <p class="hero-eyebrow">VALIENTE TOYAMA JUNIOR PRESENTS</p>
+
+      <!-- エンブレム -->
+      <img src="ヴァリエンテ富山エンブレム.webp" alt="ヴァリエンテ富山エンブレム" class="hero-emblem">
+
+      <!-- V CUP ＋ 日付 -->
+      <div class="hero-title-row">
+        <div>
+          <div class="hero-vcup-text">V CUP</div>
+          <div class="hero-vcup-sub">U8 U9 Football Festival</div>
+        </div>
+        <div class="hero-date">
+          <div class="hero-date-text">18 July</div>
+          <div class="hero-date-sub">皆さん、ようこそ、熱い地へ</div>
+        </div>
       </div>
-      <div class="hero-buttons">
-        <a href="vcup2026_u8.html" class="hero-btn u8">
-          <span class="btn-category">Category</span>
-          <span class="btn-title">U8 午前の部</span>
-          <span class="btn-sub">16チーム参加 / AM集合</span>
-          <span class="btn-arrow">→</span>
+
+      <!-- カテゴリーボタン -->
+      <div class="hero-cat-btns">
+        <a href="vcup2026_u8.html" class="hero-cat-btn">
+          <div class="hero-cat-title">U-8 AM</div>
+          <div class="hero-cat-sub">大会専用ページ</div>
         </a>
-        <a href="vcup2026_u9.html" class="hero-btn">
-          <span class="btn-category">Category</span>
-          <span class="btn-title">U9 午後の部</span>
-          <span class="btn-sub">14チーム参加 / PM集合</span>
-          <span class="btn-arrow">→</span>
+        <a href="vcup2026_u9.html" class="hero-cat-btn">
+          <div class="hero-cat-title">U-9 PM</div>
+          <div class="hero-cat-sub">大会専用ページ</div>
         </a>
       </div>
+
+      <!-- インフォメーション -->
+      <div class="hero-info">
+        <div class="hero-info-title">information</div>
+        <div class="hero-info-sub">会場ルールの遵守にご協力お願いします</div>
+        <div class="hero-info-btns">
+          <a href="#access" class="hero-info-btn">試合会場<br>Google Map</a>
+          <a href="#parking" class="hero-info-btn">駐車場<br>注意事項</a>
+          <a href="#notice" class="hero-info-btn">飲料水<br>販売情報</a>
+          <a href="#notice" class="hero-info-btn">大会運営<br>大会要項</a>
+        </div>
+      </div>
+
     </div>
   </header>
 
   <!-- Overview -->
-  <section>
+  <section id="overview">
     <div class="container">
       <h2 class="section-title">大会概要</h2>
       <div class="overview-grid">
@@ -517,7 +528,7 @@
   </section>
 
   <!-- Rules -->
-  <section style="padding-top: 0;">
+  <section id="notice" style="padding-top: 0;">
     <div class="container">
       <h2 class="section-title">お知らせ</h2>
       <div class="info-grid">
@@ -574,7 +585,7 @@
   </section>
 
   <!-- Access -->
-  <section style="padding-top: 0;">
+  <section id="access" style="padding-top: 0;">
     <div class="container">
       <h2 class="section-title">アクセス</h2>
       <div class="map-wrapper">
@@ -594,7 +605,7 @@
   </section>
 
   <!-- Parking -->
-  <section style="padding-top: 0;">
+  <section id="parking" style="padding-top: 0;">
     <div class="container">
       <h2 class="section-title">駐車場案内</h2>
 
