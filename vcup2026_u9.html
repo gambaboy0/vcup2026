@@ -1,3 +1,8 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,11 +16,11 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --primary: #1A3A6C;
-      --primary-dark: #0f2347;
-      --accent: #E86A1A;
+      --primary: #1B6B2A;
+      --primary-dark: #0F4019;
+      --accent: #F5B400;
       --white: #FFFFFF;
-      --bg: #F4F7FB;
+      --bg: #EBF5FF;
       --card: #FFFFFF;
       --text: #1A1A2E;
       --muted: #6B7280;
@@ -31,7 +36,13 @@
     body {
       font-family: 'Noto Sans JP', sans-serif;
       color: var(--text);
-      background: var(--bg);
+      background:
+        radial-gradient(ellipse 600px 180px at 15% 8%, rgba(255,255,255,0.7) 0%, transparent 60%),
+        radial-gradient(ellipse 400px 120px at 70% 18%, rgba(255,255,255,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse 300px 90px at 88% 6%, rgba(255,255,255,0.5) 0%, transparent 60%),
+        radial-gradient(ellipse 250px 80px at 42% 28%, rgba(255,255,255,0.4) 0%, transparent 60%),
+        linear-gradient(to bottom, #87CEEA 0%, #A8D8F0 15%, #C0E5F8 35%, #D5EEF8 55%, #E5F5FC 75%, #EEF9FF 100%);
+      background-attachment: fixed;
       padding-top: calc(var(--notice-h) + var(--nav-h));
     }
 
@@ -86,24 +97,33 @@
 
     /* ===== Header ===== */
     .site-header {
-      position: relative; overflow: hidden; height: 180px;
-      display: flex; align-items: flex-end; justify-content: center;
+      position: relative; overflow: hidden; height: 230px;
+      display: flex; align-items: center; justify-content: center;
       background: var(--primary);
     }
-    @media (min-width: 768px) { .site-header { height: 220px; } }
-    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-    .hero-overlay { position: absolute; inset: 0; background: rgba(10,30,70,0.58); }
-    .header-content { position: relative; z-index: 2; text-align: center; padding: 14px 20px 24px; width: 100%; }
-    .header-logo {
-      font-size: clamp(1.7rem, 6vw, 2.8rem); font-weight: 700;
-      color: var(--white); letter-spacing: 0.04em; line-height: 1;
-      text-shadow: 0 2px 14px rgba(0,0,0,0.5);
+    @media (min-width: 768px) { .site-header { height: 280px; } }
+    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+    .hero-overlay { position: absolute; inset: 0; background: rgba(0,20,60,0.2); }
+    .header-content {
+      position: relative; z-index: 2; text-align: center;
+      padding: 10px 20px; width: 100%;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
     }
-    .header-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+    .header-emblem {
+      height: clamp(90px, 22vw, 160px);
+      width: auto;
+      filter: drop-shadow(0 2px 16px rgba(0,0,0,0.35));
+    }
+    .header-logo {
+      font-size: clamp(1.4rem, 5vw, 2.4rem); font-weight: 700;
+      color: var(--white); letter-spacing: 0.04em; line-height: 1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.55);
+    }
+    .header-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
     .badge {
-      background: rgba(255,255,255,0.14); color: var(--white);
-      font-weight: 700; font-size: 0.8rem; padding: 4px 14px;
-      border-radius: 999px; border: 1px solid rgba(255,255,255,0.32);
+      background: rgba(255,255,255,0.18); color: var(--white);
+      font-weight: 700; font-size: 0.78rem; padding: 4px 12px;
+      border-radius: 999px; border: 1px solid rgba(255,255,255,0.38);
     }
 
     /* ===== Container / Section ===== */
@@ -140,7 +160,7 @@
     table thead th:first-child { padding-left: 10px; }
     table tbody td { padding: 10px 7px; text-align: center; border-bottom: 1px solid var(--border); color: var(--text); }
     table tbody tr:last-child td { border-bottom: none; }
-    table tbody tr:hover { background: #F0F5FF; }
+    table tbody tr:hover { background: #EFF8EF; }
 
     .schedule-table { min-width: 800px; }
     .schedule-table td.time {
@@ -151,7 +171,7 @@
     .schedule-table td.match-cell { padding: 8px 6px; vertical-align: top; min-width: 165px; }
     .match-label {
       display: block; font-size: 0.66rem; font-weight: 700; color: var(--primary);
-      margin-bottom: 3px; background: rgba(26,58,108,0.08);
+      margin-bottom: 3px; background: rgba(27,107,42,0.08);
       border-radius: 3px; padding: 1px 5px; white-space: nowrap;
     }
     .team-text { display: block; font-size: 0.78rem; font-weight: 700; text-align: center; line-height: 1.35; min-height: 1.2em; }
@@ -178,7 +198,7 @@
     .standings-table tbody td:nth-child(1) { text-align: center; }
     .standings-table tbody td:nth-child(2) { text-align: left; padding-left: 14px; font-weight: 700; }
     .standings-table tbody tr:last-child td { border-bottom: none; }
-    .standings-table tbody tr:hover { background: #F0F5FF; }
+    .standings-table tbody tr:hover { background: #EFF8EF; }
 
     .rank-badge {
       display: inline-block; width: 24px; height: 24px; border-radius: 50%;
@@ -235,9 +255,10 @@
   </nav>
 
   <header class="site-header">
-    <img src="vcup_hero.jpg" alt="V CUP 2026 U9" class="hero-img">
+    <img src="vcup_sky_landscape.jpg" alt="V CUP 2026 U9" class="hero-img">
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="header-content">
+      <img src="ヴァリエンテ富山エンブレム.webp" alt="ヴァリエンテ富山エンブレム" class="header-emblem">
       <div class="header-logo">V CUP 2026 U9</div>
       <div class="header-badges">
         <span class="badge">📅 2026年7月18日（土）午後の部</span>
